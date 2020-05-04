@@ -9,9 +9,3 @@ router.post('/sign_up', user.sign_up);
 router.post('/login', user.login);
 router.get('/logout', user.logout);
 
-
-// router.get('/:id', test.show);
-// router.delete('/:id', test.destroy);
-// router.post('/', test.create);
-// router.put('/:id', test.update);
-
