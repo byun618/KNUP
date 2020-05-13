@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const fs = require('fs')
 
 module.exports = router;
 
@@ -10,16 +11,12 @@ module.exports = router;
     //     session : session
     // });
 
-/* 
-    /views/user 
-    프린트 신청할때
-*/
-router.get('/user', (req, res) => res.render('./user'));
-router.get('/user/signup', (req, res) => res.render('./user/signup'));
+router.get('/', (req, res) => {
+    var file = "/Users/sanghyunbyun/Desktop/KNUP/KNUPS_Server/app/views/test.pdf"
 
-/* 
-    /views/print 
-    인증코드 입력
-*/
-router.get('/print', )
+    fs.readFile(file, (err, data) => {
+        res.contentType('application/pdf')
+        res.send(data);
+    })
+});
 

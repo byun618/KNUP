@@ -20,8 +20,9 @@ app.use(session({
     }
 }));
 
-app.use('/view', require('./views'))
-app.use('/test', require('./api/test'));
-app.use('/user', require('./api/user'));
+/* 페이지로드 URL */
+app.use('/KNUPS', require('./views'));
+/* API URL */
+app.use('/api', require('./api'));
 
 module.exports = app;
