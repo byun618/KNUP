@@ -11,7 +11,8 @@ module.exports = router;
     //     session : session
     // });
 
-router.get('/', (req, res) => {
+router.get('/', (req, res) => res.render('index'))
+router.get('/preview', (req, res) => {
     var file = "/Users/sanghyunbyun/Desktop/KNUP/KNUPS_Server/app/views/test.pdf"
 
     fs.readFile(file, (err, data) => {
