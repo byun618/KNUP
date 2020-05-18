@@ -23,9 +23,15 @@
                        name="write_form" onsubmit="return checkIt()">
            
               <h2>프린트할 파일을 선택하세요. </h2>
-              <input type="file" name="attach_file" id="getfile" >
+              <input multiple="multiple" type="file" name="attach_file[]" id="getfile" >
               <br><br>
-              
+              <!-- 파일 드래그하는거 -->
+              <!-- <div onchange="dropfile();">Drap and Drop here.</div>
+              <script>
+                 var dropFile = function(event) {
+                 event.preventDefault();
+                 }
+              </script> -->
               <h2>미리보기</h2>
               <img id="preview" src="" width="700" alt="미리보기 영역">
               <script>
