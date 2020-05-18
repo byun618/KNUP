@@ -25,40 +25,6 @@
               <h2>프린트할 파일을 선택하세요. </h2>
               <input type="file" name="attach_file" id="getfile" >
               <br><br>
-                 
-              <h2>프린트 방향을 선택해주세요.</h2>
-              <select name="item">
-                 <option value="asd">가로</option>
-                 <option value="dfg">세로</option>
-              </select>
-              <br><br>
-              
-              <h2>페이지당 슬라이드 수</h2>
-              페이지당 슬라이드 수 <input type="text" name="slideNum" size="5" 
-                         onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
-                        >
-              <br><br>
-              
-              <h2>페이지 범위</h2>
-              <input type="radio" name="pageRange" value="all" checked> 모두
-              <br>
-              <input type="radio" name="pageRange" value="first_p"> 시작페이지 <input type="text" name="firstpage" size="15" value="ex)1,2,3" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 끝 페이지 <input type="text" name="lastPage" size="15" value="ex)3,5,6" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
-              <br>
-              <input type="radio" name="pageRange" value="select_s"> 선택한 슬라이드
-              <br>
-              <input type="radio" name="pageRange" value="range_d"> 범위 지정 <input type="text" name="RangeChoice" size="15" value="ex)1-3,5-10" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
-              <br><br>
-              
-              <h2>프린트 매수</h2>
-              <input type="text" name="printNum" value="1" size="10" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
-              <br><br>
-              
-              <h2>프린터를 선택해주세요.</h2>
-              <select name="printname">
-                 <option value="printer1">printer1</option>
-                 <option value="printer2">printer2</option>
-              </select>
-              <br><br>
               
               <h2>미리보기</h2>
               <img id="preview" src="" width="700" alt="미리보기 영역">
@@ -80,7 +46,20 @@
               </script>
               <br><br>
               
-              <button>정보 저장</button>
+              <script>
+                 function confirmEX() {
+                     var ret = confirm("인증코드입니다.");
+                     if(ret == true) {
+                     // 사용자가 "확인" 버튼을 누른 경우
+                     result.innerHTML ="확인을 눌렀군요";
+                  }
+                  else {
+                     // 취소 버튼이나 다이얼로그가 닫힌 경우
+                     result.innerHTML ="취소나 그냥 닫았군요";
+                  }
+}
+              </script>
+              <button onclick="confirmEX()">신청</button>
               
               
               
