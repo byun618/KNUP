@@ -19,11 +19,12 @@
               return true;
               }
               </script>
-           <form action ="/api/printform" method="post" enctype="multipart/form-data" 
+           <form action ="/api/file" method="post" enctype="multipart/form-data" 
                        name="write_form" onsubmit="return checkIt()">
            
               <h2>프린트할 파일을 선택하세요. </h2>
-              <input multiple="multiple" type="file" name="attach_file[]" id="getfile" >
+              <!-- <input multiple="multiple" type="file" name="attach_file" id="getfile" > -->
+              <input type="file" name='userfile'>
               <br><br>
               <!-- 파일 드래그하는거 -->
               <!-- <div onchange="dropfile();">Drap and Drop here.</div>
