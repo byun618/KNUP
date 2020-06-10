@@ -28,13 +28,9 @@ var storage = multer.diskStorage({
       
     },
     filename: function (req, file, cb) {
-        let array = file.originalname.split('.');
-        array[0] = array[0] + '_';
-        array[1] = '.' + array[1];
-        array.splice(1, 0, Date.now().toString());
-        const result = array.join('');
+       
         console.log(result);
-        cb(null, result); }  
+        cb(null, file.originalname); }  
     }
   )
   
