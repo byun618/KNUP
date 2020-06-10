@@ -1,9 +1,22 @@
 exports.upload = (req, res) => {
 
-    var path = req.file.path;
+    var files = req.files;
+    var filecount = files.length;
+
+    var path = req.files[0].path;
+
+    for(var i = 0; i < filecount; i++) {
+          
+        console.log(req.files[i]);
+        
+
+    }
+    
     path = path.substring(8,14)
 
-    //res.json(req.file);
+  
+
+    
     console.log(path);
 
     res.render('result', {code : path});
