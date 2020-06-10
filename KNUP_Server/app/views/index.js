@@ -15,3 +15,4 @@ router.get('/', (req, res) => res.render('index'));
 router.get('/signup', (req, res) => res.render('signup'));
 router.get('/printForm',(req,res) => res.render('printForm'));
 router.get('/result',(req,res) => res.render('result'));
+router.get('/print',(req,res) => res.render('print'));

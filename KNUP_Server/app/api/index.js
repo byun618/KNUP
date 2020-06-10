@@ -6,7 +6,7 @@ module.exports = router;
 /* 새로운 API 생기면 추가 */
 router.use('/user', require('./user'))
 router.use('/file', require('./file'))
-
+router.use('/print', require('./print'))
 
 router.post('/printform', function(req, res) {
     console.log(req.body);

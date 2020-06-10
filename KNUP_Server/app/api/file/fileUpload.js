@@ -5,19 +5,14 @@ const mkdirp = require('mkdirp');
 
 var file = require('./file');
 
-
 var vaildcode = Math.floor(Math.random() * 1000000)+100000;
 
     if(vaildcode>1000000){
     vaildcode = vaildcode - 100000;
     }
 
-   
-
- var vaildfolder = 'uploads/' + vaildcode;
-    
- 
-
+var vaildfolder = 'uploads/' + vaildcode;
+  
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
 
