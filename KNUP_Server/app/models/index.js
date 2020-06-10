@@ -10,7 +10,6 @@ var sequelize =new Sequelize(config.database, config.username, config.password, 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-db.Test = require('./test')(sequelize, Sequelize);
 db.User = require('./user')(sequelize, Sequelize);
 
 module.exports = db;
