@@ -1,13 +1,40 @@
-<div id="wrap">
-    <span class="title">Hello!</span>
-    <div class="user">
-        <input type="button" class="btn" onclick=" location.href='/KNUP/printForm'" value="LOGIN"/>
-        <input type="button" class="btn" onclick=" location.href='/KNUP/printForm'" value="프린트신청하기"/>
-        <input type="button" class="btn" onclick=" location.href='/KNUP/signup'" value="SIGNUP"/>
-        <input type="button" class="btn" onclick=" location.href='/KNUP/print'" value="프린트하기"/>
-    </div>
-</div>
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta charset="utf-8">
+    <title>KNUP</title>
+    <style>
+       
 
-<div>
-<a href="https://kauth.kakao.com/oauth/authorize?client_id=7e5d1c5a3647aead2c2abadcedbe6754&redirect_uri=http://localhost:3000/KNUP&response_type=code">LogIn</a>
-</div>
+        body {
+            font: 300 15px/1.2 "Helvetica Neue", Helvetica, Arial, sans-serif;
+            background-color:skyblue;
+        }
+        
+        h1 {
+            margin-bottom: 20px;
+            color:black;
+            text-transform: uppercase;
+            font-size: 100px;
+            font-weight: 100;
+            letter-spacing: 30px;
+            text-shadow: 3px 3px 5px #000;
+            text-align: center;
+        }
+        #kakao-login {
+            text-align: center;
+
+        }
+    </style>
+</head>    
+<body>
+    <h1>KNUP</h1>
+
+        <div id="kakao-login">
+            <a href="/KNUP/select" style="font-size:large;">카카오톡 로그인</a>
+        </div>
+
+</body>
+
+</html>

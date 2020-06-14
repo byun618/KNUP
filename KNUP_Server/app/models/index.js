@@ -11,5 +11,7 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 db.User = require('./user')(sequelize, Sequelize);
+db.File = require('./file')(sequelize, Sequelize);
+db.Code = require('./code')(sequelize, Sequelize);
 
 module.exports = db;

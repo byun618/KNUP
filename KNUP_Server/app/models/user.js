@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => { 
-    return sequelize.define('user_test', { 
+    return sequelize.define('user', { 
         
         user_id: {
             type: DataTypes.STRING(50),
@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
         salt: DataTypes.STRING(45)
 
     },{ timestamps: false,
-        tableName: 'user_test'
+        tableName: 'user'
     });
  
 }

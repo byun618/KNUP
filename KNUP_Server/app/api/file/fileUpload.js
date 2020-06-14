@@ -1,38 +1,52 @@
-const express = require('express');
-const router = express.Router();
-const multer = require('multer');
-const mkdirp = require('mkdirp');
+const express = require('express')
+const router = express.Router()
+const models = require('../../models')
+const multer = require('multer')
+const mkdirp = require('mkdirp')
+const file = require('./file')
 
-var file = require('./file');
+models.Code.findAll().then( (result) => {
 
-var vaildcode = Math.floor(Math.random() * 1000000)+100000;
+  var arr = []
+  var validCode
+  
+  /* DB에서 code 리스트들을 뽑아서 리스트로 만든후 중복 제거 후 생성 및 디비에 저장 */
+  for(var i = 0; i < result.length; i++) {
+      arr.push(result[i].dataValues.code)
+  }
+  do {
+      validCode = Math.floor(Math.random() * 1000000)
+  } while(!notSame(validCode))
 
-    if(vaildcode>1000000){
-    vaildcode = vaildcode - 100000;
+  models.Code.create({
+    code: validCode
+  }).catch( (err) => {
+    console.log(err)
+  })
+  
+  let folder = 'uploads/' + validCode
+  var storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      mkdirp(folder, (err) => {
+        if(err)
+        console.log(err)
+      })
+
+      cb(null, folder)
+    },
+    filename: (req, file, cb) => {
+      cb(null, file.originalname)
     }
+  })
 
-var vaildfolder = 'uploads/' + vaildcode;
+  var upload = multer({storage: storage})
+
+  router.post('/', upload.array('userfile'), file.upload)
   
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-
-    //인증코드폴더생성
-    mkdirp(vaildfolder, function (err) {
-      if(err);
-      console.error(err);
-    });
-
-   
-
-    cb(null, vaildfolder);
-  },
-  filename: function (req, file, cb) {
-    console.log(file.originalname);
-    cb(null, file.originalname); }  
+  function notSame(n) {
+      return arr.every((e) => n !== e)
+  }
 })
-  
-var upload = multer({ storage: storage })
-
-router.post('/', upload.array('userfile'), file.upload);
 
 module.exports = router
+
