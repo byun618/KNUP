@@ -1,0 +1,55 @@
+<html>
+   <title>SONGPRINTER</title>
+   <body>
+      <script>
+      function checkIt(){
+      
+         var form = document.write_form;     
+         if (form.attach_file.value==""){
+            alert ("파일을 선택하세요.");
+            form.attach_file.focus();
+            return false;
+         }
+         return true;
+      }
+      </script>
+
+      <form action ="/api/file/upload" method="post" enctype="multipart/form-data" name="write_form" onsubmit="return checkIt()">
+      
+         <h2>프린트할 파일을 선택하세요. </h2>
+         <input multiple="multiple" type="file" name="userfile" id="getfile" >
+         <!--input type="file" name='userfile'-->
+         <br><br>
+         <!-- 파일 드래그하는거 -->
+          <div onchange="dropfile();">Drap and Drop here.</div>
+         <script>
+            var dropFile = function(event) {
+            event.preventDefault();
+            }
+         </script> 
+         <h2>미리보기</h2>
+         <img id="preview" src="" width="700" alt="미리보기 영역">
+         <script>
+         var file = document.querySelector('#getfile');
+      
+            file.onchange = function () { 
+               var fileList = file.files ;
+               
+               // 읽기
+               var reader = new FileReader();
+               reader.readAsDataURL(fileList [0]);
+         
+               //로드 한 후
+               reader.onload = function  () {
+                  document.querySelector('#preview').src = reader.result ;
+               }; 
+            }; 
+         </script>
+         <br><br>
+ 
+         <button>신청</button>      
+      </form>
+
+   </body>
+
+</html>

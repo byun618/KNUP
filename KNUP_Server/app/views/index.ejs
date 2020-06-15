@@ -1,40 +1,44 @@
 <!DOCTYPE html>
 <html>
-<head>
-    
-    <meta charset="utf-8">
-    <title>KNUP</title>
-    <style>
-       
+    <head>
+        <style>
+            h1 {
+                margin-bottom: 20px;
+                color:black;
+                text-transform: uppercase;
+                font-size: 100px;
+                font-weight: 100;
+                letter-spacing: 30px;
+                text-shadow: 3px 3px 5px #000;
+                text-align: center;
+            }
 
-        body {
-            font: 300 15px/1.2 "Helvetica Neue", Helvetica, Arial, sans-serif;
-            background-color:skyblue;
-        }
-        
-        h1 {
-            margin-bottom: 20px;
-            color:black;
-            text-transform: uppercase;
-            font-size: 100px;
-            font-weight: 100;
-            letter-spacing: 30px;
-            text-shadow: 3px 3px 5px #000;
-            text-align: center;
-        }
-        #kakao-login {
-            text-align: center;
-
-        }
-    </style>
-</head>    
-<body>
-    <h1>KNUP</h1>
-
-        <div id="kakao-login">
-            <a href="/KNUP/select" style="font-size:large;">카카오톡 로그인</a>
-        </div>
-
-</body>
-
+            div {
+                width: 100%;
+            }
+            div.left {
+                width: 50%;
+                float: left;
+                box-sizing: border-box;
+                text-align:center;
+            }
+            div.right {
+                width: 50%;
+                float: right;
+                box-sizing: border-box;
+                text-align:center;
+            }
+        </style>    
+    </head>
+    <body>
+        <h1>KNUP</h1>
+            <div>
+                <div class="left" >
+                    <a href="/KNUP/print_submit" style="font-size:xx-large; ">신청 하기</a>
+                </div>
+                <div class="right">
+                    <a href="/KNUP/print" style="font-size:xx-large; ">프린트 하기</a>
+                </div>
+            </div>
+    </body> 
 </html>

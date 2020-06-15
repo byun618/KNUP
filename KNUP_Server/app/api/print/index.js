@@ -1,26 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const fs = require('fs')
+const print = require('./print')
 
 module.exports = router;
 
-router.post('/filelist', (req, res) => {
-
-    var path = '/Users/sanghyunbyun/Desktop/KNUP/KNUP_Server/bin/uploads/'
-    path += req.body.code
-
-    fs.readdir(path, (err, filelist) => {
-        res.render('filelist', {filelist: filelist, length: filelist.length, code: req.body.code})
-    })
-})
-
-router.get('/preview/:code/:filename', (req, res) => {
-
-    var path = "/Users/sanghyunbyun/Desktop/KNUP/KNUP_Server/bin/uploads/" 
-    path += req.params.code + "/" + req.params.filename
-    
-    fs.readFile(path, (err, data) => {
-        res.contentType('application/pdf')
-        res.send(data);
-    })
-})
+router.post('/filelist', print.filelist) //show the list of files to print
+router.get('/preview/:code/:filename', print.preview) //show preview of file
+//post로 바꿀것
