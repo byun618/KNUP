@@ -17,15 +17,20 @@ models.Code.findAll().then( (result) => {
   function notSame(n) {
     return arr.every((e) => n !== e)
 }
+
+
+
   
   var storage = multer.diskStorage({
+
+    
     
     destination: (req, file, cb) => {
 
       do {
-          validCode = Math.floor(Math.random() * 1000000)
-          console.log('일단만든code: ', validCode);
-          
+        validCode = Math.floor(Math.random() * 1000000)
+        console.log('일단만든code: ', validCode);
+        
       } while(!notSame(validCode))
   
       console.log('만든code: ', validCode);
@@ -46,7 +51,7 @@ models.Code.findAll().then( (result) => {
       cb(null, file.originalname)
     }
   })
-  console.log('최종code: ');
+  console.log('최종code: ', validCode);
 
   var upload = multer({storage: storage})
 

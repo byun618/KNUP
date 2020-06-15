@@ -1,5 +1,6 @@
 const models = require('../../models')
 
+
 exports.upload = (req, res) => {
     
     code = req.files[0].path.substring(8,14)
@@ -10,6 +11,7 @@ exports.upload = (req, res) => {
         console.log(err)
       })    
 
+  
     // for(var i = 0; i < req.files.length; i++) {
     //     models.File.create({
     //         file_name: req.files[i].filename,
@@ -65,7 +67,3 @@ exports.upload1 = (req, res) => {
     })
 }
 
-function pad(n) {
-    n = n + '';
-    return n.length >= 6 ? n : new Array(6 - n.length + 1).join('0') + n;
-  }

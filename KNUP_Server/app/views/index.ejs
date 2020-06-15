@@ -1,44 +1,127 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <style>
-            h1 {
-                margin-bottom: 20px;
-                color:black;
-                text-transform: uppercase;
-                font-size: 100px;
-                font-weight: 100;
-                letter-spacing: 30px;
-                text-shadow: 3px 3px 5px #000;
-                text-align: center;
-            }
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+		<title>KNUP</title>
+		<meta name="description" content="KNUP" />
+		<meta name="keywords" content="SIMPLE AND FAST" />
+		<meta name="author" content="Codrops" />
+		<link rel="shortcut icon" href="../favicon.ico">
+		<link rel="stylesheet" type="text/css" href="/css/demo.css" />
+		<link rel="stylesheet" type="text/css" href="/css/component.css" />
+		<script src="/js/modernizr.custom.js"></script>
+		<script type="/text/javascript">
+		function checkIt(){
 
-            div {
-                width: 100%;
-            }
-            div.left {
-                width: 50%;
-                float: left;
-                box-sizing: border-box;
-                text-align:center;
-            }
-            div.right {
-                width: 50%;
-                float: right;
-                box-sizing: border-box;
-                text-align:center;
-            }
-        </style>    
-    </head>
-    <body>
-        <h1>KNUP</h1>
-            <div>
-                <div class="left" >
-                    <a href="/KNUP/print_submit" style="font-size:xx-large; ">신청 하기</a>
-                </div>
-                <div class="right">
-                    <a href="/KNUP/print" style="font-size:xx-large; ">프린트 하기</a>
-                </div>
-            </div>
-    </body> 
+        	var form = document.write_form;
+        	if (form.attach_file.value=="")
+        	{
+        		alert ("파일을 선택하세요.");
+        		form.attach_file.focus();
+        		return false;
+        	}
+        	return true;
+        }
+		</script>
+	</head>
+	<body>
+		<div class="container">
+			<div id="splitlayout" class="splitlayout">
+				<div class="intro">
+					<div class="side side-left">
+						<header class="codropsheader clearfix">
+							<span>WELCOME!<span class="bp-icon bp-icon-about" data-content="The Blueprints are a collection of basic and minimal website concepts, components, plugins and layouts with minimal style for easy adaption and usage, or simply for inspiration."></span></span>
+							<h1>KNU PRINT</h1>
+						</header>
+						<div class="intro-content">
+							<div class="profile"><img src="/img/profile1.jpg" alt="profile1"></div>
+							<h1><span>프린트 신청하기</span><span>낄낄낄<br>the print at here</span></h1>
+						</div>
+						<div class="overlay"></div>
+					</div>
+					<div class="side side-right">
+						<div class="intro-content">
+							<div class="profile"><img src="/img/profile2.jpg" alt="profile2"></div>
+							<h1><span>Print </span><span>You can check <br>your print list <br>at here</span></h1>
+						</div>
+						<div class="overlay"></div>
+					</div>
+				</div><!-- /intro -->
+				<div class="page page-right">
+					<div class="page-inner">
+						<section>
+							<h2>Print</h2>
+							<script type="text/javascript">
+							    function numberMaxLength(e) {
+       								if(e.value.length > e.maxLength) {
+            							e.value = e.value.slice(0, e.maxLength)
+        							}
+    							}
+    							function validate(){
+									form = document.frm
+									code = form.code.value;
+
+									if(code.length == 6){
+										form.submit()
+									} else {
+										alert('인증코드의 길이를 확인해주세요')
+									}
+								}
+							</script>
+							<form name="frm" action="/api/print/filelist" method="POST">
+        						<input type="number" name="code" maxLength="6" oninput="numberMaxLength(this);">
+        						<input type="button" onclick="validate()" value="인증">
+    						</form>
+						</section>
+					</div><!-- /page-inner -->
+				</div><!-- /page-right -->
+				<div class="page page-left">
+					<div class="page-inner">
+						<section>
+							<h2>Apply</h2>
+							<form action ="/api/file/upload" method="post" enctype="multipart/form-data" name="write_form" onsubmit="return checkIt()">
+								<h2>Choose your file </h2>
+								<input multiple="multiple" type="file" name="userfile" id="getfile" >
+								<!--input type="file" name='userfile'-->
+								<br><br>
+								<!-- 파일 드래그하는거 -->
+								<div onchange="dropfile();">Drag and Drop here.</div>
+								<script type="text/javascript">
+								var dropFile = function(event) {
+								event.preventDefault();
+								}
+								</script>
+								<h2>preview</h2>
+								<img id="preview" src="" width="700" alt="미리보기 영역">
+								<script type="text/javascript">
+									var file = document.querySelector('#getfile');
+									file.onchange = function () {
+										var fileList = file.files ;
+
+
+										var reader = new FileReader();
+										reader.readAsDataURL(fileList [0]);
+
+
+										reader.onload = function  () {
+											document.querySelector('#preview').src = reader.result ;
+										};
+									};
+								</script>
+								<br><br>
+
+								<button>신청</button>
+						  	</form>
+						</section>
+					</div><!-- /page-inner -->
+				</div><!-- /page-left -->
+				<a href="#" class="back back-right" title="back to intro">&rarr;</a>
+				<a href="#" class="back back-left" title="back to intro">&larr;</a>
+			</div><!-- /splitlayout -->
+		</div><!-- /container -->
+		<script src="/js/classie.js"></script>
+		<script src="/js/cbpSplitLayout.js"></script>
+	</body>
 </html>
