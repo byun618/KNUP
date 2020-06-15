@@ -1,23 +1,36 @@
 const fs = require('fs')
+const models = require('../../models')
 
 exports.filelist = (req, res) => {
 
-    var path = '/Users/sanghyunbyun/Desktop/KNUP/KNUP_Server/bin/uploads/'
-    path += req.body.code
+    models.File.findAll({
+        attributes: ['originalname', 'storedname'],
+        where: {
+            code: req.body.code
+        }
+    }).then( (result) => {
 
-    fs.readdir(path, (err, filelist) => {
-        if(err){
+        if(result.length == 0){
             res.redirect('/KNUP/print')
         } else {
-            res.render('filelist', {filelist: filelist, length: filelist.length, code: req.body.code})
+            originalnames = []
+            storednames = []
+            for(var i = 0; i < result.length; i++){
+                originalnames.push(result[i].originalname)
+                storednames.push(result[i].storedname)
+            }
+            res.render('filelist', {filelist: originalnames, filepath: storednames, length: result.length, code: req.body.code})
         }
+    }).catch( (err) => {
+
+        res.redirect('/KNUP/print')
     })
 }
 
 exports.preview = (req, res) => {
     var path = "/Users/sanghyunbyun/Desktop/KNUP/KNUP_Server/bin/uploads/" 
     //path += req.body.code + "/" + req.body.filename
-    path += 'd04ab92902091b540d8c1e4db87ea7bf'
+    path += req.body.filename
 
     fs.readFile(path, (err, data) => {
         res.contentType('application/pdf')

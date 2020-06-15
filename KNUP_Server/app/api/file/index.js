@@ -4,8 +4,8 @@ const multer = require('multer')
 const file = require('./file')
 const upload = multer({dest: 'uploads/'})
 
-// router.post('/upload', upload.array('userfile'), file.upload)
-router.use('/upload', require('./fileUpload_backup'))
+router.post('/upload', upload.array('userfile'), file.upload1)
+//router.use('/upload', require('./fileUpload_backup'))
 
 module.exports = router;
 
