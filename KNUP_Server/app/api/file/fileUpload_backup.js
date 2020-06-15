@@ -10,38 +10,49 @@ models.Code.findAll().then( (result) => {
   var arr = []
   var validCode
   
-  /* DB에서 code 리스트들을 뽑아서 리스트로 만든후 중복 제거 후 생성 및 디비에 저장 */
   for(var i = 0; i < result.length; i++) {
-      arr.push(result[i].dataValues.code)
+    arr.push(result[i].dataValues.code)
   }
-  do {
-      validCode = Math.floor(Math.random() * 1000000)
-  } while(!notSame(validCode))
 
-  console.log('code: ', validCode)
+  function notSame(n) {
+    return arr.every((e) => n !== e)
+}
   
-  let folder = 'uploads/' + validCode
   var storage = multer.diskStorage({
+    
     destination: (req, file, cb) => {
+
+      do {
+          validCode = Math.floor(Math.random() * 1000000)
+          console.log('일단만든code: ', validCode);
+          
+      } while(!notSame(validCode))
+  
+      console.log('만든code: ', validCode);
+      var folder = 'uploads/' + validCode
+
       mkdirp(folder, (err) => {
         if(err)
         console.log(err)
       })
-
+      
+      console.log('저장code: ', validCode);
       cb(null, folder)
+
+       /* DB에서 code 리스트들을 뽑아서 리스트로 만든후 중복 제거 후 생성 및 디비에 저장 */
+      
     },
     filename: (req, file, cb) => {
       cb(null, file.originalname)
     }
   })
+  console.log('최종code: ');
 
   var upload = multer({storage: storage})
 
   router.post('/', upload.array('userfile'), file.upload)
   
-  function notSame(n) {
-      return arr.every((e) => n !== e)
-  }
+  
 }).catch( (err) => {
   console.log(err)
 })
