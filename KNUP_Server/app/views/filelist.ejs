@@ -1,4 +1,16 @@
-<% for(var i = 0; i < length ; i++){ %>
+<!-- <% for(var i = 0; i < length ; i++){ %>
     <a href="/api/print/preview/<%=code%>/<%=filelist[i]%>"><%=filelist[i]%></a>
     <br>
+<% } %> -->
+
+<% for(var i = 0; i < length ; i++){ %>
+    <form action="/api/print/preview" method="POST">
+        
+        <input type="hidden" name="code" value="<%=code%>">
+        <input type="hidden" name="filename" value="<%=filelist[i]%>">
+        <input type="submit" value="<%=filelist[i]%>">
+        
+    </form>
+    <br>
 <% } %>
+

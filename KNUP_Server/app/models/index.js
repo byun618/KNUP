@@ -10,7 +10,9 @@ var sequelize =new Sequelize(config.database, config.username, config.password, 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-db.File = require('./file')(sequelize, Sequelize);
-db.Code = require('./code')(sequelize, Sequelize);
+db.Code = require('./code')(sequelize, Sequelize)
+db.File = require('./file')(sequelize, Sequelize)
+
+db.Code.hasOne(db.File, {foreignKey: 'code'})
 
 module.exports = db;
