@@ -1,9 +1,7 @@
 <% for(var i = 0; i < length ; i++){ %>
     <form action="/api/print/preview" method="POST">
-        
         <input type="hidden" name="filename" value="<%=filepath[i]%>">
         <input type="submit" value="<%=filelist[i]%>">
-        
     </form>
     <br>
 <% } %>

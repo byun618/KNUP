@@ -32,6 +32,7 @@ exports.preview = (req, res) => {
     //path += req.body.code + "/" + req.body.filename
     path += req.body.filename
 
+    console.log(path)
     fs.readFile(path, (err, data) => {
         res.contentType('application/pdf')
         res.send(data);

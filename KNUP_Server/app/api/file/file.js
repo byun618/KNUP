@@ -3,30 +3,6 @@ const models = require('../../models')
 
 exports.upload = (req, res) => {
     
-    code = req.files[0].path.substring(8,14)
-
-    models.Code.create({
-        code: code
-      }).catch( (err) => {
-        console.log(err)
-      })    
-
-  
-    // for(var i = 0; i < req.files.length; i++) {
-    //     models.File.create({
-    //         file_name: req.files[i].filename,
-    //         code: code
-    //     }).catch( (err) => {
-    //         console.log(err)
-    //     })
-    // }
-
-
-    res.render('print_submit_result', {code : code});
-}
-
-exports.upload1 = (req, res) => {
-
     models.Code.findAll().then( (result) => {
         var arr = []
         var code
@@ -66,3 +42,7 @@ exports.upload1 = (req, res) => {
     })
 }
 
+function pad(n) {
+    n = n + '';
+    return n.length >= 6 ? n : new Array(6 - n.length + 1).join('0') + n;
+}
