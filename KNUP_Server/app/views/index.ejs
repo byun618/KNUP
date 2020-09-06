@@ -9,10 +9,12 @@
 		<meta name="keywords" content="SIMPLE AND FAST" />
 		<meta name="author" content="Codrops" />
 		<link rel="shortcut icon" href="../favicon.ico">
-		<link rel="stylesheet" type="text/css" href="/css/demo.css" />
+		<link rel="stylesheet" type="text/css" href="/css/component2.css" />
 		<link rel="stylesheet" type="text/css" href="/css/component.css" />
+		<link rel="stylesheet" type="text/css" href="/css/button.css" />
 		<script src="/js/modernizr.custom.js"></script>
 		<script type="/text/javascript">
+
 		function checkIt(){
 
         	var form = document.write_form;
@@ -80,39 +82,21 @@
 				<div class="page page-left">
 					<div class="page-inner">
 						<section>
-							<h2>Apply</h2>
+							<h2 style="text-align: center;">Apply</h2>
+							
 							<form action ="/api/file/upload" method="post" enctype="multipart/form-data" name="write_form" onsubmit="return checkIt()">
-								<h2>Choose your file </h2>
-								<input multiple="multiple" type="file" name="userfile" id="getfile" >
-								<!--input type="file" name='userfile'-->
+								<h2 style="text-align: center;" >Choose your file </h2>
+								<div class="wrap">
+								<input style="text-align: center;" multiple="multiple" type="file" name="userfile" id="getfile" >
+							</div>
 								<br><br>
-								<!-- 파일 드래그하는거 -->
-								<div onchange="dropfile();">Drag and Drop here.</div>
-								<script type="text/javascript">
-								var dropFile = function(event) {
-								event.preventDefault();
-								}
-								</script>
-								<h2>preview</h2>
-								<img id="preview" src="" width="700" alt="미리보기 영역">
-								<script type="text/javascript">
-									var file = document.querySelector('#getfile');
-									file.onchange = function () {
-										var fileList = file.files ;
-
-
-										var reader = new FileReader();
-										reader.readAsDataURL(fileList [0]);
-
-
-										reader.onload = function  () {
-											document.querySelector('#preview').src = reader.result ;
-										};
-									};
-								</script>
+							
+								
 								<br><br>
 
-								<button>신청</button>
+								<div class="wrap">
+									<button class="button">Submit</button>
+								</div>
 						  	</form>
 						</section>
 					</div><!-- /page-inner -->
