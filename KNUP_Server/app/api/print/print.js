@@ -1,5 +1,7 @@
 const fs = require('fs')
 const models = require('../../models')
+const pdfDocumment = require('pdfkit')
+
 
 exports.filelist = (req, res) => {
 
@@ -28,9 +30,11 @@ exports.filelist = (req, res) => {
 }
 
 exports.preview = (req, res) => {
-    var path = "/Users/sanghyunbyun/Desktop/KNUP/KNUP_Server/bin/uploads/" 
+    var path = "/Users/ayumi/OneDrive/바탕 화면/KNUP/KNUP_Server/bin/uploads/" 
     //path += req.body.code + "/" + req.body.filename
     path += req.body.filename
+
+
 
     console.log(path)
     fs.readFile(path, (err, data) => {

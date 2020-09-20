@@ -1,19 +1,20 @@
+<link rel="stylesheet" type="text/css" href="/css/printButton.css" />
 
-<html >
-    <head>
-    </head>
-      
-        <body style="text-align: center;">
-            <% for(var i = 0; i < length ; i++){ %>
-                <form action="/api/print/preview" method="POST">
-                    <input type="hidden" name="filename" value="<%=filepath[i]%>">
-                    <h1>
-                    <input type="submit" value="<%=filelist[i]%>">
-                    </h1>
-                    </form>
-                <br>
-            <% } %>
-        
-        </body>
-      
-</html>
+
+
+
+
+
+
+
+   
+
+<div class="wrap">
+<% for(var i = 0; i < length ; i++){ %>
+    <form action="/api/print/preview" method="POST">
+        <input type="hidden" name="filename" value="<%=filepath[i]%>">
+        <input class ="button" type="submit" value="<%=filelist[i]%>">
+    </form>
+    <br>
+<% } %>
+<div>
