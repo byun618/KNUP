@@ -30,7 +30,7 @@ exports.filelist = (req, res) => {
 }
 
 exports.preview = (req, res) => {
-    var path = "/Users/sanghyunbyun/Desktop/KNUP/KNUP_Server/bin/uploads/" 
+    var path = "/Users/ayumi/OneDrive/바탕 화면/KNUP/KNUP_Server/bin/uploads/" 
 
     origin = req.body.originalname
     stored = req.body.storedname
