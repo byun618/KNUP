@@ -9,14 +9,28 @@
 <h1 style="text-align: center;">↙↙↙↙↙↙↙↙↙↙</h1>
 
    
+<script language='javascript'>
+    function newWindow(idx){
+        form = "print" + idx
+        console.log(form)
+        var gsWin = window.open('about:blank', form);
+        var frms = document.forms;
+        var frm = frms[idx]
+        frm.action = '/api/print/preview';
+        frm.target = form;
+        frm.method = "post";
+        frm.submit();
+    }
+</script>
 
 <div class="wrap">
 <% for(var i = 0; i < length ; i++){ %>
-    <form action="/api/print/preview" method="POST">
-        <input type="hidden" name="storedname" value="<%=storednames[i]%>">
+    <form name ="print<%=i%>" action='/api/print/preview' method='POST'>
+        <input type="hidden" value="<%=i%>" id="idx">
+        <input type="hidden" name="storedname" value="<%=storednames[i]%>"/>
         <input type="hidden" name="originalname" value="<%=originalnames[i]%>">
-        <input class ="button" type="submit" value="<%=originalnames[i]%>">
+        <input class ="button" value="<%=originalnames[i]%>" onclick="newWindow(idx.value)"/>
     </form>
-    <br>
 <% } %>
-<div>
+    <br>
+</div>
