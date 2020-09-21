@@ -13,8 +13,9 @@
 <div class="wrap">
 <% for(var i = 0; i < length ; i++){ %>
     <form action="/api/print/preview" method="POST">
-        <input type="hidden" name="filename" value="<%=filepath[i]%>">
-        <input class ="button" type="submit" value="<%=filelist[i]%>">
+        <input type="hidden" name="storedname" value="<%=storednames[i]%>">
+        <input type="hidden" name="originalname" value="<%=originalnames[i]%>">
+        <input class ="button" type="submit" value="<%=originalnames[i]%>">
     </form>
     <br>
 <% } %>

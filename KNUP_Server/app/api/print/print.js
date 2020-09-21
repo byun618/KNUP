@@ -21,7 +21,7 @@ exports.filelist = (req, res) => {
                 originalnames.push(result[i].originalname)
                 storednames.push(result[i].storedname)
             }
-            res.render('filelist', {filelist: originalnames, filepath: storednames, length: result.length, code: req.body.code})
+            res.render('filelist', {originalnames: originalnames, storednames: storednames, length: result.length, code: req.body.code})
         }
     }).catch( (err) => {
 
@@ -30,15 +30,46 @@ exports.filelist = (req, res) => {
 }
 
 exports.preview = (req, res) => {
-    var path = "/Users/ayumi/OneDrive/바탕 화면/KNUP/KNUP_Server/bin/uploads/" 
-    //path += req.body.code + "/" + req.body.filename
-    path += req.body.filename
+    var path = "/Users/sanghyunbyun/Desktop/KNUP/KNUP_Server/bin/uploads/" 
 
+    origin = req.body.originalname
+    stored = req.body.storedname
 
+    split = origin.split('.')
+    end = split.length - 1
+    format = split[end]
 
-    console.log(path)
+    path += stored
+
     fs.readFile(path, (err, data) => {
-        res.contentType('application/pdf')
+
+        switch (format) {
+            case 'docx':
+                res.contentType('application/vnd.openxmlformats-officedocument.wordprocessingml.document')
+                break
+            case 'xlsx':
+                res.contentType('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+                break
+            case 'pptx':
+                res.contentType('application/vnd.openxmlformats-officedocument.presentationml.presentation')
+                break
+            case 'pdf':
+                res.contentType('application/pdf')
+                break
+            case 'doc':
+                res.contentType('application/msword')
+                break
+            case 'xls':
+                res.contentType('application/vnd.ms-excel')
+                break
+            case 'ppt':
+                res.contentType('application/vnd.ms-powerpoint')
+                break
+    
+        }
+
+
+        
         res.send(data);
     })
 }
