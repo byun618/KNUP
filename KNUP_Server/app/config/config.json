@@ -1,7 +1,7 @@
 {
     "development": {
-      "username": "root",
-      "password": "dbalsdl2",
+      "username": "knup",
+      "password": "knup",
       "database": "knup",
       "host": "127.0.0.1",
       "dialect": "mysql",
