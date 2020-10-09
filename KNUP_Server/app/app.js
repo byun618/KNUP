@@ -13,6 +13,11 @@ var path = require('path')
 
 app.use( express.static(__dirname + '/views'));
 
+app.get('/check', (req, res) => {
+	console.log('fine')
+	res.send('fine')
+})
+
 /* 페이지로드 URL */
 app.use('/KNUP', require('./views'));
 /* API URL */
