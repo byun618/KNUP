@@ -1,0 +1,2 @@
+cd uploads
+rm -rf *

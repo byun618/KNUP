@@ -1,6 +1,15 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const shell = require('shelljs')
+
+shell.cd('/home/ubuntu/KNUP/KNUP_Server/bin')
+
+if(shell.exec('sh ./delete.sh').code !== 0) {
+  shell.echo('Error: command failed')
+  console.log('asd')
+  shell.exit(1)
+}
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
