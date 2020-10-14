@@ -6,5 +6,5 @@ module.exports = router;
 /* API 라우팅 */
 router.use('/file', require('./file'))
 router.use('/print', require('./print'))
-
+router.use('/login', require('./login'))
 

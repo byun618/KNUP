@@ -1,5 +1,5 @@
 const app = require('../app/app');
-const port = 8080;
+const port = 3000;
 const syncDatabase = require('./sync-database');
 
 app.listen(port, () => {

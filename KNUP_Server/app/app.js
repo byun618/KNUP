@@ -3,11 +3,11 @@ const app = express();
 const bodyParser = require('body-parser');
 const shell = require('shelljs')
 
-if(shell.exec('sh ./delete.sh').code !== 0) {
-  shell.echo('Error: command failed')
-  console.log('asd')
-  shell.exit(1)
-}
+// if(shell.exec('sh ./delete.sh').code !== 0) {
+//   shell.echo('Error: command failed')
+//   console.log('asd')
+//   shell.exit(1)
+// }
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
@@ -25,6 +25,7 @@ app.get('/check', (req, res) => {
 	res.send('fine')
 })
 
+const request = require('request');
 /* 페이지로드 URL */
 app.use('/KNUP', require('./views'));
 /* API URL */
