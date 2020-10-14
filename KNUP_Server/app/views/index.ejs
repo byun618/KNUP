@@ -12,61 +12,45 @@
 		<link rel="stylesheet" type="text/css" href="/css/component2.css" />
 		<link rel="stylesheet" type="text/css" href="/css/component.css" />
 		<link rel="stylesheet" type="text/css" href="/css/button.css" />
-		
 		<script src="/js/modernizr.custom.js"></script>
-
-
-		
-		
 		<script type="text/javascript">
-
 			function checkIt(){
 
-			var form = document.write_form;
-			if (form.attach_file.value=="")
-			{
-				alert ("파일을 선택하세요.");
-				form.attach_file.focus();
-				return false;
-			}
-			return true;
+				var form = document.write_form;
+				if (form.attach_file.value=="")
+				{
+					alert ("파일을 선택하세요.");
+					form.attach_file.focus();
+					return false;
+				}
+				return true;
 			}
 
 			var imgArray=new Array();
 				imgArray[0]="/img/1.jpg";
-				 imgArray[1]="/img/2.jpg";
+				imgArray[1]="/img/2.jpg";
 				imgArray[2]="/img/3.jpg";
-			   imgArray[3]="/img/4.jpg";
+			   	imgArray[3]="/img/4.jpg";
 
 			window.onload=function showImage(){
 			   var imgNum=Math.round(Math.random()*3);
 			   var objImg=document.getElementById("introimg");
 			   objImg.src=imgArray[imgNum];
-			   
-
-			   setTimeout(showImage,3000); }
-			
-			</script>
-	    
-		
-		
-		
+	
+			   setTimeout(showImage,3000); 
+			}
+		</script>
 	</head>
 	<body>
 		<div class="container">
 			<div id="splitlayout" class="splitlayout">
 				<div class="intro">
-					
 					<div class="side side-left">
 						<header class="codropsheader clearfix">
-							
 							<span class="bp-icon bp-icon-about" data-content="The Blueprints are a collection of basic and minimal website concepts, components, plugins and layouts with minimal style for easy adaption and usage, or simply for inspiration."></span></span>
 							<h1>KNU PRINT</h1>
 						</header>
-						
 						<div class="intro-content">
-							
-						
 							<div class="profile"><img src="/img/apply.png" alt="profile1"></div>
 							<h1><span>APPLY</span><span>프린트를<br>신청하세요</span></h1>
 							<img id="introimg" width="300" height ="100" >
@@ -79,9 +63,15 @@
 								<span>ID</span>
 								<span>잔액</span>
 								
-							  
-								<span>충전</span>
-								<span>로그아웃</span>
+								<span>
+								<form action="/api/kakao/charge" method="POST">
+									<input type="submit" value="충전">
+								</form>
+								</span>
+
+								<!-- <span>충전</span> -->
+								<span><a href="/api/kakao/logout">로그아웃</a></span>
+								<!-- <span><a href="https://kauth.kakao.com/oauth/logout?client_id=7e5d1c5a3647aead2c2abadcedbe6754&logout_redirect_uri=http://localhost:3000/KNUP/login">로그아웃</a></span> -->
 								
 							  </nav>
 							

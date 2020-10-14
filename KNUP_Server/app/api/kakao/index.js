@@ -6,5 +6,5 @@ const request = require('request');
 module.exports = router;
 
 router.get('/login', kakao.login);
-
-router.get('/auth', kakao.auth);
+router.get('/logout', kakao.logout);
+router.post('/charge', kakao.charge)
