@@ -1,10 +1,18 @@
 {
-    "development": {
-      "username": "admin",
-      "password": "adminpwd",
-      "database": "knup",
-      "host": "knup-db-1.cha3fjeugy4r.ap-northeast-2.rds.amazonaws.com",
-      "dialect": "mysql",
-      "operatorAliases" : false
-    }
+  "development": {
+    "username": "knup",
+    "password": "knup",
+    "database": "knup",
+    "host": "localhost",
+    "dialect": "mysql",
+    "operatorAliases" : false
+  },
+  "aws": {
+    "username": "admin",
+    "password": "adminpwd",
+    "database": "knup",
+    "host": "knup-db-1.cha3fjeugy4r.ap-northeast-2.rds.amazonaws.com",
+    "dialect": "mysql",
+    "operatorAliases" : false
+  }
 }
