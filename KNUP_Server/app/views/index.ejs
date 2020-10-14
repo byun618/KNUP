@@ -60,13 +60,15 @@
 					<div class="side side-right">
 						<header class="codropsheader clearfix">
 							<nav>
-								<span>ID</span>
-								<span>잔액</span>
+								<span style="float: left;"><%= nickname%> 님 반가어용&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </span>
+
+								<span style="float: left;">잔액&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 								
-								<span>
+								<span style="float: left;">
 								<form action="/api/kakao/charge" method="POST">
 									<input type="submit" value="충전">
 								</form>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								</span>
 
 								<!-- <span>충전</span> -->

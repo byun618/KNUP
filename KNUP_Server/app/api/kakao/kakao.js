@@ -48,7 +48,8 @@ exports.login = (req, res) => {
                     
                     parseJson = JSON.parse(body)
                     USER_ID = parseJson.id
-
+                    nickname = parseJson.properties.nickname;
+                    res.render('index', {nickname : nickname});
                 } catch(err) {
                     console.log(error);
                 }
@@ -57,7 +58,7 @@ exports.login = (req, res) => {
     }
     
     request.post(options, callback);
-    res.redirect('/KNUP');
+    
 }
 
 exports.charge = (req, res) => {
