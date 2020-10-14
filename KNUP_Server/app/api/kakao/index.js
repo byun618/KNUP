@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const login = require('./login');
+const kakao = require('./kakao');
 const request = require('request');
 
 module.exports = router;
 
-router.get('/callback', login.getCode);
+router.get('/login', kakao.login);
 
-router.get('/auth', login.auth);
+router.get('/auth', kakao.auth);
