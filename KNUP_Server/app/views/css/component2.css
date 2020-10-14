@@ -1,3 +1,14 @@
+header {
+	height: 25px;
+	padding: 1rem;
+	color: white;
+	background: teal;
+	font-weight: bold;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+  }
+
 html, body, 
 .container {
 	position: relative;
