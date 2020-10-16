@@ -17,6 +17,6 @@ db.Kakao = require('./kakao')(sequelize, Sequelize)
 
 db.Code.hasOne(db.File, {foreignKey: 'code'})
 
-db.Kakao.belongsTo(db.Code);
+db.Code.hasOne(db.Kakao,{ foreignKey : 'code'})
 
 module.exports = db;

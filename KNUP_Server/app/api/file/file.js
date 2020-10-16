@@ -32,11 +32,7 @@ exports.upload = (req, res) => {
                     console.log(err)
                 })
             }
-            models.Kakao.create({
-                code : code
-            }).catch( (err) => {
-                console.log(err)
-            })
+            
 
         }).catch( (err) => {
             console.log(err)

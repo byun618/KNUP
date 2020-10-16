@@ -31,12 +31,11 @@ exports.login = (req, res) => {
     function callback(error, response, body) {
         
         if (!error && response.statusCode == 200) { 
-            console.log(body);
+            console.log('111', body);
            
             parseJson = JSON.parse(body)
             ACCESS_TOKEN = parseJson.access_token;
            
-            console.log(ACCESS_TOKEN);
             
             request.get({
                 url: "https://kapi.kakao.com/v2/user/me",
@@ -45,12 +44,19 @@ exports.login = (req, res) => {
                 }
                 
             }, async (err, response, body) => {
+
                 
                     await console.log(body);
+
+                try{
+                    await console.log('222', body);
+
                     
                     parseJson = JSON.parse(body)
                     USER_ID = parseJson.id
+
                     nickname = parseJson.properties.nickname;
+
                     await res.render('index', {nickname : nickname});
 
                     models.Kakao.create({
@@ -64,6 +70,13 @@ exports.login = (req, res) => {
                      });
                   
                 
+
+                   
+
+                } catch(err) {
+                    console.log(error);
+                }
+
             }) 
         }
     }
@@ -73,11 +86,37 @@ exports.login = (req, res) => {
 }
 
 exports.charge = (req, res) => {
+    
+    request.post({
+        url: "https://kapi.kakao.com/v1/payment/ready",
+        headers: {
+            Authorization: `KakaoAK ${ADMIN_KEY}`,
+            // "Content-Type" : 
+        },
+        form: {
+            cid: 'TC0ONETIME',
+            partner_order_id: '1',
+            partner_user_id: '1',
+            item_name: '초코파이',
+            quantity: 1,
+            total_amount: 2200,
+            vat_amount: 200,
+            tax_free_amount: 0,
+            approval_url: 'http://localhost:3000/api/kakao/payment/success',
+            fail_url: 'http://localhost:3000/api/kakao/payment/fail',
+            cancel_url: 'http://localhost:3000/api/kakao/payment/cancel'
+        }
+        ,followRedirect: true
+        
+    }, (err, response, body) => {
 
+        parseJson = JSON.parse(body)
 
+        console.log(parseJson)
+        res.redirect(parseJson.next_redirect_pc_url)
+    })
 
-    console.log('asd')
-    res.send('asd')
+    
 }
 
 exports.logout = (req, res) => {
@@ -97,35 +136,35 @@ exports.logout = (req, res) => {
 }
 
 exports.sendCode = (req, res) => {
-   
-   
-       
-      
-    
+
         headers = {
             Authorization: `Bearer ${ACCESS_TOKEN}`
             
         }       
       
+      
         var options = {
-            url : 'https://kapi.kakao.com/v2/api/talk/memo/send',
+            url : `https://kapi.kakao.com/v2/api/talk/memo/send?template_id=23612`,
             headers : headers,
-            data : {
-                'template_id' : "23612",
-                'template_args' : {"key": req.body.code}
-            }
+            template_args: {
+                key: req.body.code
+            } 
+          
+           
     
         };
 
         function callback(error, response, body) {
         
-            if (!error && response.statusCode == 200) { 
-                console.log(body);
+            if (!error) { 
+                console.log('asd', body);
+                //console.log(code);
+                res.render('index', {nickname : nickname});
             }
         }
 
         request.post(options, callback);
-        res.render('index', {nickname : nickname});
+        
     }
 
   
