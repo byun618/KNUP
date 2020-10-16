@@ -6,14 +6,19 @@
 </head>
   <body style="background-color:#47a3da">
     <h1 style="text-align: center">
+  
       <p style="font-size: 200%"> 인증 코드</p>
       <p style="font-size: 200%"> <%=code %></p>
+      <form action="/api/kakao/sendCode" method="POST">
+        <button> 내 카카오톡으로 인증코드 보내고 홈으로 돌아가기</button>
+        
+      </form>
+    
       
     </h1>
 
 
-    <h2 style="text-align: center">
-    <a href='/KNUP'>초기화면으로 돌아가기</a>
+  
     </h2>
   </body>
 </html>

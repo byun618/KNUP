@@ -12,6 +12,7 @@ const shell = require('shelljs')
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
+
 app.use('./api/uploads', express.static('uploads'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));

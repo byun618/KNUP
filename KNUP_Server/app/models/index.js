@@ -12,7 +12,11 @@ db.Sequelize = Sequelize;
 
 db.Code = require('./code')(sequelize, Sequelize)
 db.File = require('./file')(sequelize, Sequelize)
+db.Kakao = require('./kakao')(sequelize, Sequelize)
+
 
 db.Code.hasOne(db.File, {foreignKey: 'code'})
+
+db.Kakao.belongsTo(db.Code);
 
 module.exports = db;

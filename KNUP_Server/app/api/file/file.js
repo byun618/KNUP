@@ -1,11 +1,12 @@
 const models = require('../../models')
-
+const request = require('request');
+var code;
 
 exports.upload = (req, res) => {
     
     models.Code.findAll().then( (result) => {
         var arr = []
-        var code
+       
         let files = req.files
         
         /* DB에서 code 리스트들을 뽑아서 리스트로 만든후 중복 안되게 코드 생성*/
@@ -26,15 +27,22 @@ exports.upload = (req, res) => {
                     code: code,
                     originalname: files[i].originalname,
                     storedname: files[i].filename
+
                 }).catch( (err) => {
                     console.log(err)
                 })
             }
+            models.Kakao.create({
+                code : code
+            }).catch( (err) => {
+                console.log(err)
+            })
+
         }).catch( (err) => {
             console.log(err)
         })
 
-        res.render('print_submit_result', {code : code});
+        res.render('print_submit_result', {code : code, nickname : req.body.nickname});
 
         function notSame(n) {
             return arr.every((e) => n !== e)

@@ -3,6 +3,8 @@ const router = express.Router();
 const request = require('request');
 const { json } = require('express');
 
+const models = require('../../models');
+
 const REST_API_KEY = '7e5d1c5a3647aead2c2abadcedbe6754';
 const REDIRECT_URI = 'http://localhost:3000/api/kakao/login';
 const ADMIN_KEY = 'ffdce5ce2d5d6bd3fe17aed1ec63d1fd';
@@ -43,16 +45,25 @@ exports.login = (req, res) => {
                 }
                 
             }, async (err, response, body) => {
-                try{
+                
                     await console.log(body);
                     
                     parseJson = JSON.parse(body)
                     USER_ID = parseJson.id
                     nickname = parseJson.properties.nickname;
-                    res.render('index', {nickname : nickname});
-                } catch(err) {
-                    console.log(error);
-                }
+                    await res.render('index', {nickname : nickname});
+
+                    models.Kakao.create({
+                        id : USER_ID,
+                        nickname : nickname
+                    }) .then(result => {
+                        res.json(result);
+                     })
+                     .catch(err => {
+                        console.error(err);
+                     });
+                  
+                
             }) 
         }
     }
@@ -84,3 +95,40 @@ exports.logout = (req, res) => {
     })
     res.redirect('/KNUP/login')
 }
+
+exports.sendCode = (req, res) => {
+   
+   
+       
+      
+    
+        headers = {
+            Authorization: `Bearer ${ACCESS_TOKEN}`
+            
+        }       
+      
+        var options = {
+            url : 'https://kapi.kakao.com/v2/api/talk/memo/send',
+            headers : headers,
+            data : {
+                'template_id' : "23612",
+                'template_args' : {"key": req.body.code}
+            }
+    
+        };
+
+        function callback(error, response, body) {
+        
+            if (!error && response.statusCode == 200) { 
+                console.log(body);
+            }
+        }
+
+        request.post(options, callback);
+        res.render('index', {nickname : nickname});
+    }
+
+  
+
+
+

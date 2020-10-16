@@ -7,4 +7,5 @@ module.exports = router;
 
 router.get('/login', kakao.login);
 router.get('/logout', kakao.logout);
-router.post('/charge', kakao.charge)
+router.post('/charge', kakao.charge);
+router.post('/sendCode', kakao.sendCode);
