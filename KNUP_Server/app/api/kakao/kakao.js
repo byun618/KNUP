@@ -17,7 +17,6 @@ var nickname;
 exports.login = (req, res) => {
 
     var AUTHORIZE_CODE = req.query.code;
-    console.log(AUTHORIZE_CODE);
 
     var dataString = `grant_type=authorization_code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&code=${AUTHORIZE_CODE}`;
     var headers = 'application/x-www-form-urlencoded';
@@ -25,147 +24,88 @@ exports.login = (req, res) => {
         url : 'https://kauth.kakao.com/oauth/token',
         headers : headers,
         body : dataString
-
     };
 
-    function callback(error, response, body) {
-        
+    var sess = req.session
+
+    request.post(options, (error, response, body) => {
         if (!error && response.statusCode == 200) { 
-            console.log('111', body);
-           
+            
             parseJson = JSON.parse(body)
             ACCESS_TOKEN = parseJson.access_token;
-           
             
             request.get({
                 url: "https://kapi.kakao.com/v2/user/me",
                 headers: {
-                        Authorization: `Bearer ${ACCESS_TOKEN}`
+                    Authorization: `Bearer ${ACCESS_TOKEN}`
                 }
                 
-            }, async (err, response, body) => {
-
+            }, (err, response, body) => {
                 
-                    await console.log(body);
+                parseJson = JSON.parse(body)
+                USER_ID = parseJson.id
 
-                try{
-                    await console.log('222', body);
+                nickname = parseJson.properties.nickname;
 
-                    
-                    parseJson = JSON.parse(body)
-                    USER_ID = parseJson.id
+                models.User.upsert({
+                    userid: USER_ID,
+                    nickname: nickname
+                }).then( () => {
+                    sess.userid = USER_ID
+                    sess.nickname = nickname
 
-                    nickname = parseJson.properties.nickname;
-
-                    await res.render('index', {nickname : nickname});
-
-                    models.Kakao.create({
-                        id : USER_ID,
-                        nickname : nickname
-                    }) .then(result => {
-                        res.json(result);
-                     })
-                     .catch(err => {
-                        console.error(err);
-                     });
-                  
-                
-
-                   
-
-                } catch(err) {
-                    console.log(error);
-                }
-
+                    res.render('index', {nickname : nickname});
+                }).catch( err => {
+                    console.log(err)
+                })
             }) 
         }
-    }
-    
-    request.post(options, callback);
-    
-}
-
-exports.charge = (req, res) => {
-    
-    request.post({
-        url: "https://kapi.kakao.com/v1/payment/ready",
-        headers: {
-            Authorization: `KakaoAK ${ADMIN_KEY}`,
-            // "Content-Type" : 
-        },
-        form: {
-            cid: 'TC0ONETIME',
-            partner_order_id: '1',
-            partner_user_id: '1',
-            item_name: '초코파이',
-            quantity: 1,
-            total_amount: 2200,
-            vat_amount: 200,
-            tax_free_amount: 0,
-            approval_url: 'http://localhost:3000/api/kakao/payment/success',
-            fail_url: 'http://localhost:3000/api/kakao/payment/fail',
-            cancel_url: 'http://localhost:3000/api/kakao/payment/cancel'
-        }
-        ,followRedirect: true
-        
-    }, (err, response, body) => {
-
-        parseJson = JSON.parse(body)
-
-        console.log(parseJson)
-        res.redirect(parseJson.next_redirect_pc_url)
-    })
-
+    });
     
 }
 
 exports.logout = (req, res) => {
 
-    console.log(USER_ID)
-    console.log(ACCESS_TOKEN)
     request.post({
         url: "https://kapi.kakao.com/v1/user/unlink",
         headers: {
             Authorization: `Bearer ${ACCESS_TOKEN}`
         }
     }, (err, res, body) => {
-        console.log(res)
-        console.log(body)
+        parseJson = JSON.parse(body)
+        console.log(parseJson)
     })
     res.redirect('/KNUP/login')
 }
 
 exports.sendCode = (req, res) => {
 
-        headers = {
-            Authorization: `Bearer ${ACCESS_TOKEN}`
-            
-        }       
-      
-      
-        var options = {
-            url : `https://kapi.kakao.com/v2/api/talk/memo/send?template_id=23612`,
-            headers : headers,
-            template_args: {
-                key: req.body.code
-            } 
-          
-           
+    res.send('asd')
+
+    // headers = {
+    //     Authorization: `Bearer ${ACCESS_TOKEN}`
+        
+    // }     
     
-        };
+    // var options = {
+    //     url : `https://kapi.kakao.com/v2/api/talk/memo/send?template_id=23612`,
+    //     headers : headers,
+    //     template_args: {
+    //         key: req.body.code
+    //     } 
+    // }
 
-        function callback(error, response, body) {
-        
-            if (!error) { 
-                console.log('asd', body);
-                //console.log(code);
-                res.render('index', {nickname : nickname});
-            }
-        }
+    // function callback(error, response, body) {
+    
+    //     if (!error) { 
+    //         console.log('asd', body);
+    //         //console.log(code);
+    //         res.render('index', {nickname : nickname});
+    //     }
+    // }
 
-        request.post(options, callback);
-        
-    }
+    // request.post(options, callback);
+}
 
   
 

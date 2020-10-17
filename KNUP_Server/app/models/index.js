@@ -10,13 +10,15 @@ var sequelize =new Sequelize(config.database, config.username, config.password, 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-db.Code = require('./code')(sequelize, Sequelize)
+// db.Code = require('./code')(sequelize, Sequelize)
 db.File = require('./file')(sequelize, Sequelize)
-db.Kakao = require('./kakao')(sequelize, Sequelize)
+db.User = require('./user')(sequelize, Sequelize)
 
 
-db.Code.hasOne(db.File, {foreignKey: 'code'})
+db.User.hasOne(db.File, {foreignKey: 'userid'})
 
-db.Code.hasOne(db.Kakao,{ foreignKey : 'code'})
+// db.Code.hasOne(db.File, {foreignKey: 'code'})
+
+// db.Code.hasOne(db.Kakao,{ foreignKey : 'code'})
 
 module.exports = db;
