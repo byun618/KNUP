@@ -5,9 +5,9 @@ const { json } = require('express');
 
 const models = require('../../models');
 
-const REST_API_KEY = '7e5d1c5a3647aead2c2abadcedbe6754';
-const REDIRECT_URI = 'http://localhost:3000/api/kakao/login';
-const ADMIN_KEY = 'ffdce5ce2d5d6bd3fe17aed1ec63d1fd';
+const { REST_API_KEY } = process.env;
+const { REDIRECT_URI } = process.env;
+const { ADMIN_KEY } = process.env;
 
 var ACCESS_TOKEN;
 var USER_ID;

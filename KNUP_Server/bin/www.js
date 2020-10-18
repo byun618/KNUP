@@ -1,6 +1,9 @@
 const app = require('../app/app');
-const port = 3000;
 const syncDatabase = require('./sync-database');
+const path = require("path");
+
+
+const { PORT : port } = process.env; 
 
 app.listen(port, () => {
     console.log('Connected port', port);

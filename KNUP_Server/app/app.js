@@ -3,6 +3,9 @@ const app = express();
 const bodyParser = require('body-parser');
 const shell = require('shelljs')
 const session = require('express-session')
+const path = require('path')
+require('dotenv').config({ path: path.join(__dirname, '/../.env') });
+
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');

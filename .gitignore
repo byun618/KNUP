@@ -1,3 +1,5 @@
 #Test
 node_modules/
 .DS_Store
+/KNUP_Server/.env
+/KNUP_Server/app/config/*
