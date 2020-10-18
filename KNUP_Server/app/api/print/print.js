@@ -11,7 +11,7 @@ exports.filelist = (req, res) => {
     }).then( result => {
 
         if(result.length == 0){
-            res.json('zero')
+            res.json(0)
         } else {
             originalnames = []
             storednames = []
@@ -20,8 +20,8 @@ exports.filelist = (req, res) => {
                 originalnames.push(result[i].originalname)
                 storednames.push(result[i].storedname)
             }
-            
-            res.json({originalnames: originalnames, storednames: storednames})
+
+            res.json({originalnames: originalnames, storednames: storednames, len: result.length})
         }
     }).catch( (err) => {
         console.log(err)
@@ -67,8 +67,6 @@ exports.preview = (req, res) => {
                 break
     
         }
-
-        console.log(data)
         
         res.send(data);
     })

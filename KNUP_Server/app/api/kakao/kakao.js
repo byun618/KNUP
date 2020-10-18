@@ -55,7 +55,7 @@ exports.logout = (req, res) => {
     request.post({
         url: "https://kapi.kakao.com/v1/user/unlink",
         headers: {
-            Authorization: `Bearer ${ACCESS_TOKEN}`
+            Authorization: `Bearer ${access_token}`
         }
     }, (err, res, body) => {
         parseJson = JSON.parse(body)

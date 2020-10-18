@@ -61,7 +61,7 @@
 						<header class="codropsheader clearfix">
 							<nav>
 								<span style="float: left;"><%= nickname%> 님 반가어용&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </span>
-
+								
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 								<span><a href="/api/kakao/logout">로그아웃</a></span>
@@ -82,7 +82,8 @@
 					<div class="page-inner">
 						<section>
 							<h2>Print</h2>
-							<script type="text/javascript">
+							<h3>List</h3>
+							<!-- <script type="text/javascript">
 							    function numberMaxLength(e) {
        								if(e.value.length > e.maxLength) {
             							e.value = e.value.slice(0, e.maxLength)
@@ -102,7 +103,35 @@
 							<form name="frm" action="/api/print/filelist" method="POST">
         						<input type="number" name="code" maxLength="6" oninput="numberMaxLength(this);">
         						<input type="button" onclick="validate()" value="인증">
-    						</form>
+    						</form> -->
+
+							<script language='javascript'>
+								function newWindow(idx){
+									form = "print" + idx
+									console.log(form)
+									var gsWin = window.open('about:blank', form);
+									var frms = document.forms;
+									var frm = frms[idx]
+									frm.action = '/api/print/preview';
+									frm.target = form;
+									frm.method = "post";
+									frm.submit();
+								}
+							</script>
+
+							<div>
+								<% for(i = 0; i < length ; i++){ %>
+									<form name ="print<%=i%>" action='/api/print/preview' method='POST'>
+										<input type="hidden" value="<%=i%>" id="idx">
+										<input type="hidden" name="storedname" value="<%=storednames[i]%>"/>
+										<input type="hidden" name="originalname" value="<%=originalnames[i]%>">
+										<input class ="button" value="<%=originalnames[i]%>" onclick="newWindow(idx.value)"/>
+									</form>
+									<br><br>
+								<% } %>
+								<br>
+							</div>
+
 						</section>
 					</div><!-- /page-inner -->
 				</div><!-- /page-right -->

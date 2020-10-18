@@ -20,8 +20,23 @@ router.get('/', async (req, res) => {
         },
         json: true
     }, (error, response, body) => {
-        console.log(body)
-        res.render('index', {nickname:req.session.nickname})
+
+        let originalnames = body.originalnames
+        let originalnames_arr = []
+        let storednames_arr = []
+    
+        if (body != 0) {
+            originalnames_arr = Array.from(originalnames)
+            storednames_arr = Array.from(storednames)
+        }
+
+        res.render('index', 
+            {
+                nickname:req.session.nickname, 
+                originalnames: originalnames_arr, 
+                storednames: storednames_arr,
+                length: body.len
+        })
     })
 
 }); //home
