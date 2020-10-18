@@ -9,10 +9,6 @@ const { REST_API_KEY } = process.env;
 const { REDIRECT_URI } = process.env;
 const { ADMIN_KEY } = process.env;
 
-
-var USER_ID;
-var nickname;
-
 let code
 let access_token;
 
@@ -31,7 +27,6 @@ exports.oauth = (req, res) => {
         
         j_body = JSON.parse(body)
         access_token = j_body.access_token
-        // console.log('token', access_token)
         
         res.redirect('/api/kakao/login')
     })   
@@ -51,7 +46,6 @@ exports.login = (req, res) => {
         sess.userid = j_body.id
         sess.nickname = j_body.properties.nickname
 
-        // console.log(j_body)
         res.redirect('/KNUP')
     })   
 }
