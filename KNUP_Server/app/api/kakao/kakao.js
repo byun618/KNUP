@@ -31,7 +31,6 @@ exports.oauth = (req, res) => {
         
         j_body = JSON.parse(body)
         access_token = j_body.access_token
-        // console.log('token', access_token)
         
         res.redirect('/api/kakao/login')
     })   

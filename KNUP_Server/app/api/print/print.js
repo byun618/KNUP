@@ -4,26 +4,29 @@ const models = require('../../models')
 exports.filelist = (req, res) => {
 
     models.File.findAll({
+
         attributes: ['originalname', 'storedname'],
         where: {
-            code: req.body.code
+            userid: req.body.userid
         }
-    }).then( (result) => {
+    }).then( result => {
 
         if(result.length == 0){
-            res.redirect('/KNUP/print')
+            res.json('zero')
         } else {
             originalnames = []
             storednames = []
+
             for(var i = 0; i < result.length; i++){
                 originalnames.push(result[i].originalname)
                 storednames.push(result[i].storedname)
             }
-            res.render('filelist', {originalnames: originalnames, storednames: storednames, length: result.length, code: req.body.code})
+            
+            res.json({originalnames: originalnames, storednames: storednames})
         }
     }).catch( (err) => {
+        console.log(err)
 
-        res.redirect('/KNUP/print')
     })
 }
 
