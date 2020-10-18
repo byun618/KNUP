@@ -5,7 +5,11 @@ const { REST_API_KEY } = process.env;
 module.exports = router;
 
 /* 로드하고자 하는 페이지 URL 설정 및 rendring */
-router.get('/', (req, res) => res.render('index')); //home
+router.get('/', (req, res) => {
+
+    res.render('index', {nickname: req.session.nickname})
+
+}); //home
 router.get('/login', (req,res) => {
 
     console.log(REST_API_KEY)

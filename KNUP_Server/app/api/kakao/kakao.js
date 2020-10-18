@@ -9,59 +9,51 @@ const { REST_API_KEY } = process.env;
 const { REDIRECT_URI } = process.env;
 const { ADMIN_KEY } = process.env;
 
-var ACCESS_TOKEN;
+
 var USER_ID;
 var nickname;
 
-// kakao 로그인 연동 콜백
+let code
+let access_token;
+
+exports.oauth = (req, res) => {
+
+    code = req.query.code
+    
+    var dataString = `grant_type=authorization_code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&code=${code}`;
+
+    request.post({
+        url: 'https://kauth.kakao.com/oauth/token',
+        headers: 'application/x-www-form-urlencoded;charset=utf-8',
+        body: dataString
+        
+    }, (error, response, body) => {
+        
+        j_body = JSON.parse(body)
+        access_token = j_body.access_token
+        // console.log('token', access_token)
+        
+        res.redirect('/api/kakao/login')
+    })   
+}
 exports.login = (req, res) => {
 
-    var AUTHORIZE_CODE = req.query.code;
-
-    var dataString = `grant_type=authorization_code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&code=${AUTHORIZE_CODE}`;
-    var headers = 'application/x-www-form-urlencoded';
-    var options = {
-        url : 'https://kauth.kakao.com/oauth/token',
-        headers : headers,
-        body : dataString
-    };
-
-    var sess = req.session
-
-    request.post(options, (error, response, body) => {
-        if (!error && response.statusCode == 200) { 
-            
-            parseJson = JSON.parse(body)
-            ACCESS_TOKEN = parseJson.access_token;
-            
-            request.get({
-                url: "https://kapi.kakao.com/v2/user/me",
-                headers: {
-                    Authorization: `Bearer ${ACCESS_TOKEN}`
-                }
-                
-            }, (err, response, body) => {
-                
-                parseJson = JSON.parse(body)
-                USER_ID = parseJson.id
-
-                nickname = parseJson.properties.nickname;
-
-                models.User.upsert({
-                    userid: USER_ID,
-                    nickname: nickname
-                }).then( () => {
-                    sess.userid = USER_ID
-                    sess.nickname = nickname
-
-                    res.render('index', {nickname : nickname});
-                }).catch( err => {
-                    console.log(err)
-                })
-            }) 
+    request.get({
+        url: "https://kapi.kakao.com/v2/user/me",
+        headers: {
+            Authorization: `Bearer ${access_token}`
         }
-    });
-    
+    }, (error, response, body) => {
+        
+        sess = req.session
+        j_body = JSON.parse(body)
+
+        sess.userid = j_body.id
+        sess.nickname = j_body.properties.nickname
+
+        // console.log(j_body)
+        res.redirect('/KNUP')
+    })   
 }
 
 exports.logout = (req, res) => {
