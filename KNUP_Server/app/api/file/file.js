@@ -19,6 +19,6 @@ exports.upload = (req, res) => {
         })
     }
 
-    res.render('index', {nickname : nickname});
+    res.redirect('/KNUP');
 
 }
