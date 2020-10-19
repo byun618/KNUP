@@ -10,38 +10,45 @@ module.exports = router;
 /* 로드하고자 하는 페이지 URL 설정 및 rendring */
 router.get('/', async (req, res) => {
 
-    await sleep(100)
+    if (req.session.islogin) {
+        console.log('true')
 
-    request.post({
-        url: 'http://localhost:3000/api/print/filelist',
-        body: {
-            userid: req.session.userid
-        },
-        json: true
-    }, (error, response, body) => {
+        await sleep(100)
 
-        let originalnames = body.originalnames
-        let originalnames_arr = []
-        let storednames_arr = []
-    
-        if (body != 0) {
-            originalnames_arr = Array.from(originalnames)
-            storednames_arr = Array.from(storednames)
-        }
+        request.post({
+            url: 'http://localhost:3000/api/print/filelist',
+            body: {
+                userid: req.session.userid
+            },
+            json: true
+        }, (error, response, body) => {
 
-        res.render('index', 
-            {
-                nickname:req.session.nickname, 
-                originalnames: originalnames_arr, 
-                storednames: storednames_arr,
-                length: body.len
+            let originalnames = body.originalnames
+            let originalnames_arr = []
+            let storednames_arr = []
+
+            if (body != 0) {
+                originalnames_arr = Array.from(originalnames)
+                storednames_arr = Array.from(storednames)
+            }
+
+            res.render('index',
+                {
+                    nickname: req.session.nickname,
+                    originalnames: originalnames_arr,
+                    storednames: storednames_arr,
+                    length: body.len
+                })
         })
-    })
+    } else {
+        console.log('false')
+        res.redirect('/KNUP/login')
+    }
 
 }); //home
-router.get('/login', (req,res) => {
+router.get('/login', (req, res) => {
 
-    res.render('kakao_main', {client_id : REST_API_KEY })
+    res.render('kakao_main', { client_id: REST_API_KEY })
 }); //kakaomain
 
 const sleep = (ms) => {

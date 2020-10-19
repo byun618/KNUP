@@ -42,12 +42,14 @@ exports.login = (req, res) => {
 
         sess.userid = j_body.id
         sess.nickname = j_body.properties.nickname
+        sess.islogin = 'true'
 
         res.redirect('/KNUP')
     })   
 }
 
 exports.logout = (req, res) => {
+
 
     request.post({
         url: "https://kapi.kakao.com/v1/user/unlink",
@@ -56,9 +58,12 @@ exports.logout = (req, res) => {
         }
     }, (err, res, body) => {
         parseJson = JSON.parse(body)
-        console.log(parseJson)
     })
-    res.redirect('/KNUP/login')
+
+    req.session.destroy( () => {
+        req.session
+    })
+    res.redirect('/KNUP')
 }
 
 exports.sendCode = (req, res) => {

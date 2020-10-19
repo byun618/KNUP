@@ -6,7 +6,6 @@ const session = require('express-session')
 const path = require('path')
 require('dotenv').config({ path: path.join(__dirname, '/../.env') });
 
-
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
@@ -35,11 +34,5 @@ app.use('/KNUP', require('./views'));
 /* API URL */
 app.use('/api', require('./api'));
 
-app.get('/', (req, res) => {
-	id = req.session.userid
-
-	console.log(id)
-	res.send('id')
-})
 module.exports = app;
 
