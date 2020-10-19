@@ -2,7 +2,6 @@
 const express = require('express');
 const { resolve } = require('path');
 const router = express.Router();
-const models = require('../models')
 const request = require('request')
 
 const { REST_API_KEY } = process.env;

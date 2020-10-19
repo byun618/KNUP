@@ -1,9 +1,6 @@
 const express = require('express');
-const router = express.Router();
 const request = require('request');
 const { json } = require('express');
-
-const models = require('../../models');
 
 const { REST_API_KEY } = process.env;
 const { REDIRECT_URI } = process.env;

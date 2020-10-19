@@ -2,5 +2,5 @@
 node_modules/
 .DS_Store
 /KNUP_Server/.env
-/KNUP_Server/app/config/*
-echo '/KNUP_Server/bin/!uploads/.gitkeep'
+/KNUP_Server/bin/db/db-config.json
+echo '/KNUP_Server/data/!uploads/.gitkeep'

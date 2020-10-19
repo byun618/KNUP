@@ -1,4 +1,4 @@
-const models = require('../../models')
+const models = require('../../../bin/db')
 
 exports.upload = (req, res) => {
     let files = req.files
