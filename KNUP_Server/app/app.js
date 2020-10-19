@@ -10,11 +10,14 @@ require('dotenv').config({ path: path.join(__dirname, '/../.env') });
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-// app.use('./api/uploads', express.static('uploads')); 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.use( express.static(__dirname + '/views'));
+app.use(express.static(__dirname + '/views'));
+app.use('/js', express.static('../data/js'))
+app.use('/img', express.static('../data/img'))
+app.use('/css', express.static('../data/css'))
+app.use('/fonts', express.static('../data/fonts'))
 
 app.use(session({
 	secret: 'knup',

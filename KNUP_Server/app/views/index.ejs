@@ -8,11 +8,13 @@
 		<meta name="description" content="KNUP" />
 		<meta name="keywords" content="SIMPLE AND FAST" />
 		<meta name="author" content="Codrops" />
-		<link rel="shortcut icon" href="../favicon.ico">
-		<link rel="stylesheet" type="text/css" href="/css/component2.css" />
-		<link rel="stylesheet" type="text/css" href="/css/component.css" />
-		<link rel="stylesheet" type="text/css" href="/css/button.css" />
-		<script src="/js/modernizr.custom.js"></script>
+		<!-- <link rel="shortcut icon" href="../favicon.ico"> -->
+		<link rel="stylesheet" type="text/css" href="http://localhost:3000/css/component2.css" />
+		<link rel="stylesheet" type="text/css" href="http://localhost:3000/css/component.css" />
+		<link rel="stylesheet" type="text/css" href="http://localhost:3000/css/button.css" />
+		<script src="http://localhost:3000/js/modernizr.custom.js"></script>
+		<script src="http://localhost:3000/js/loadFile.js"></script>
+		<script src="http://localhost:3000/js/showBanner.js"></script>
 		<script type="text/javascript">
 			function checkIt(){
 
@@ -24,20 +26,6 @@
 					return false;
 				}
 				return true;
-			}
-
-			var imgArray=new Array();
-				imgArray[0]="/img/1.jpg";
-				imgArray[1]="/img/2.jpg";
-				imgArray[2]="/img/3.jpg";
-			   	imgArray[3]="/img/4.jpg";
-
-			window.onload=function showImage(){
-			   var imgNum=Math.round(Math.random()*3);
-			   var objImg=document.getElementById("introimg");
-			   objImg.src=imgArray[imgNum];
-	
-			   setTimeout(showImage,3000); 
 			}
 		</script>
 	</head>
@@ -51,7 +39,7 @@
 							<h1>KNU PRINT</h1>
 						</header>
 						<div class="intro-content">
-							<div class="profile"><img src="/img/apply.png" alt="profile1"></div>
+							<div class="profile"><img src="http://localhost:3000/img/apply.png" alt="profile1"></div>
 							<h1><span>APPLY</span><span>프린트를<br>신청하세요</span></h1>
 							<img id="introimg" width="300" height ="100" >
 						</div>
@@ -71,7 +59,7 @@
 							
 						</header>
 						<div class="intro-content">
-							<div class="profile"><img src="/img/print.png" alt="profile2"></div>
+							<div class="profile"><img src="http://localhost:3000/img/print.png" alt="profile2"></div>
 							<h1><span>PRINT</span><span>신청한 파일을<br>확인하세요.</span></h1>
 						
 						</div>
@@ -83,49 +71,13 @@
 						<section>
 							<h2>Print</h2>
 							<h3>List</h3>
-							<!-- <script type="text/javascript">
-							    function numberMaxLength(e) {
-       								if(e.value.length > e.maxLength) {
-            							e.value = e.value.slice(0, e.maxLength)
-        							}
-    							}
-    							function validate(){
-									form = document.frm
-									code = form.code.value;
-
-									if(code.length == 6){
-										form.submit()
-									} else {
-										alert('인증코드의 길이를 확인해주세요')
-									}
-								}
-							</script>
-							<form name="frm" action="/api/print/filelist" method="POST">
-        						<input type="number" name="code" maxLength="6" oninput="numberMaxLength(this);">
-        						<input type="button" onclick="validate()" value="인증">
-    						</form> -->
-
-							<script language='javascript'>
-								function newWindow(idx){
-									form = "print" + idx
-									console.log(form)
-									var gsWin = window.open('about:blank', form);
-									var frms = document.forms;
-									var frm = frms[idx]
-									frm.action = '/api/print/preview';
-									frm.target = form;
-									frm.method = "post";
-									frm.submit();
-								}
-							</script>
-
 							<div>
 								<% for(i = 0; i < length ; i++){ %>
 									<form name ="print<%=i%>" action='/api/print/preview' method='POST'>
 										<input type="hidden" value="<%=i%>" id="idx">
 										<input type="hidden" name="storedname" value="<%=storednames[i]%>"/>
 										<input type="hidden" name="originalname" value="<%=originalnames[i]%>">
-										<input class ="button" value="<%=originalnames[i]%>" onclick="newWindow(idx.value)"/>
+										<input class ="button" value="<%=originalnames[i]%>" onclick="loadFile(idx.value)"/>
 									</form>
 									<br><br>
 								<% } %>
@@ -139,17 +91,13 @@
 					<div class="page-inner">
 						<section>
 							<h2 style="text-align: center;">Apply</h2>
-							
 							<form action ="/api/file/upload" method="post" enctype="multipart/form-data" name="write_form" onsubmit="return checkIt()">
 								<h2 style="text-align: center;" >Choose your file </h2>
 								<div class="wrap">
-								<input style="text-align: center;" multiple="multiple" type="file" name="userfile" id="getfile" >
-							</div>
+									<input style="text-align: center;" multiple="multiple" type="file" name="userfile" id="getfile" >
+								</div>
+								<br><br>								
 								<br><br>
-							
-								
-								<br><br>
-
 								<div class="wrap">
 									<button class="button">Submit</button>
 								</div>
@@ -161,7 +109,7 @@
 				<a href="#" class="back back-left" title="back to intro">&larr;</a>
 			</div><!-- /splitlayout -->
 		</div><!-- /container -->
-		<script src="/js/classie.js"></script>
-		<script src="/js/cbpSplitLayout.js"></script>
+		<script src="http://localhost:3000/js/classie.js"></script>
+		<script src="http://localhost:3000/js/cbpSplitLayout.js"></script>
 	</body>
 </html>
