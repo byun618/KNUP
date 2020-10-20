@@ -1,4 +1,3 @@
-// const  } = require('express');
 const express = require('express');
 const { resolve } = require('path');
 const router = express.Router();
@@ -11,7 +10,6 @@ module.exports = router;
 router.get('/', async (req, res) => {
 
     if (req.session.islogin) {
-        console.log('true')
 
         await sleep(100)
 
@@ -41,7 +39,7 @@ router.get('/', async (req, res) => {
                 })
         })
     } else {
-        console.log('false')
+
         res.redirect('/KNUP/login')
     }
 
