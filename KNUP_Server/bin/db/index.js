@@ -1,7 +1,7 @@
 var path = require('path');
 var Sequelize = require('sequelize');
 
-var env = process.env.NODE_ENV || 'development'; 
+var env = process.env.NODE_ENV || 'aws'; 
 var config = require(path.join(__dirname, '.', 'db-config.json'))[env]; 
 var db = {};
 
