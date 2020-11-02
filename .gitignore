@@ -1,7 +1,12 @@
-#Test
+#KNUP_Server
 node_modules/
 .DS_Store
 /KNUP_Server/.env
 /KNUP_Server/bin/db/db-config.json
 /KNUP_Server/data/uploads/
 echo '/KNUP_Server/data/!uploads/.gitkeep'
+
+#AWSmigration
+
+/AWSmigration/bin/.env
+

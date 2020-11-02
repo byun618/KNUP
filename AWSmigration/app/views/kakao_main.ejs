@@ -1,0 +1,20 @@
+<style>
+    .img-container {
+      text-align: center;
+    }
+  </style>
+
+<div class="img-container" >
+    <img src = '/img/knup_logo.png' width="100%" >
+
+    <form action='https://kauth.kakao.com/oauth/authorize?' method="GET">   
+        <button style="background-color: white; border-color: white" box-shadow: none>
+            <img src="/img/kakao_login_2.png" >
+        </button>
+        <input type="hidden" name="client_id" value="<%=rest_api_key%>">
+        <input type="hidden" name="redirect_uri" value="<%=redirect_uri%>">
+        <input type="hidden" name="response_type" value="code">
+        <input type="hidden" name="scope" value = "account_email, profile, talk_message">
+    </form>
+</div>
+
