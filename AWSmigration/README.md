@@ -83,7 +83,7 @@ Web Util Application
 * ### deployment(AWS에서 서버 구동)
     1. AWS 구축     
         1-1. 설계
-        <img width="838" alt="스크린샷 2020-11-02 오후 10 56 29" src="https://user-images.githubusercontent.com/27637757/97876098-ad815e00-1d5e-11eb-8f18-06efeb2986b0.png">  
+        <img width="838" alt="스크린샷 2020-11-02 오후 10 56 29" src="https://user-images.githubusercontent.com/27637757/97876098-ad815e00-1d5e-11eb-8f18-06efeb2986b0.png">   
         1-2. EC2
         * NAT Instance : Community AMIs - nat 검색  - 맨 위에 있는 것
         * Web Server : Ubuntu Server 18.04 LTS (HVM), SSD Volume Type   
