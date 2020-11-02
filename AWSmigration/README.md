@@ -27,10 +27,10 @@ Web Util Application
 ## Getting Started
 
 * ### development(로컬환경에서 서버 구동)
-    1. NodeJS 설치
-    2. 카카오 디벨로퍼에서 내 애플리케이션 생성 및 카카오 로그인 활성화 ON (https://developers.kakao.com/)  
-    2-1. Redirect URI 설정. http://localshot:<원하는 포트번호>/<리다이렉트할 경로>
-    3. AWS IAM 생성 및 사용할 Bucket 생성
+    1. 카카오 디벨로퍼에서 내 애플리케이션 생성 및 카카오 로그인 활성화 ON (https://developers.kakao.com/)  
+    1-1. Redirect URI 설정. _http://localshot:<원하는 포트번호>/<리다이렉트할 경로>_
+    2. AWS IAM 생성 및 사용할 Bucket 생성
+    3. NodeJS 설치
     4. MySQL 설치   
         4-1. 유저 및 데이터베이스 생성
     5. git repo 클론
@@ -55,7 +55,7 @@ Web Util Application
         DBOPERATORALIASES = false
         AWSACCESSKEYID = AWS IAM 액세스 키 아이디
         AWSSECRETACCESSKEY = AWS IAM 시크릿 액세스 키
-        AWSBUCKETNAME = 
+        AWSBUCKETNAME = 3번에서 생성한 Bucket 이름
         AWSREGION = S3 Bucket이 있는 region
         KAKAKORESTAPIKEY = Kakao REST API KEY
         KAKAOREDIRECTURI = <리다이렉트할 경로>(without host)
@@ -70,13 +70,66 @@ Web Util Application
     ```
         node www
     ```
-
     ![ezgif com-gif-maker](https://user-images.githubusercontent.com/27637757/97846975-31712100-1d32-11eb-8e33-b43f34b6091b.gif) 
 
-    10. 크롬 브라우저 실행
-        9-1. [문서, 스프레드시트, 프레젠테이션으로 Office 버전 수정 확장프로그램](#https://chrome.google.com/webstore/detail/office-editing-for-docs-s/gbkeegbaiigmenfmjfclcdgdpimamgkj?hl=ko) 설치
-    11. 브라우저에서 실행
+    10. 크롬 브라우저 실행  
+        10-1. [문서, 스프레드시트, 프레젠테이션으로 Office 버전 수정 확장프로그램](#https://chrome.google.com/webstore/detail/office-editing-for-docs-s/gbkeegbaiigmenfmjfclcdgdpimamgkj?hl=ko) 설치    
+        10-2 브라우저에서 실행
     ```
         localhost:<포트번호>/KNUP
     ```
     ![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/27637757/97848656-be1cde80-1d34-11eb-998d-d4513c2bdd00.gif)
+
+* ### deployment(AWS에서 서버 구동)
+    1. AWS 구축     
+        1.1 설계
+        <img width="838" alt="스크린샷 2020-11-02 오후 10 56 29" src="https://user-images.githubusercontent.com/27637757/97876098-ad815e00-1d5e-11eb-8f18-06efeb2986b0.png">
+        1.2 EC2
+        * NAT Instance : Community AMIs - nat 검색  - 맨 위에 있는 것
+        * Web Server : Ubuntu Server 18.04 LTS (HVM), SSD Volume Type   
+        * LoadBalancer 설정 및 생성
+
+        1.3 VPC : 두 개의 AZ, 하나의 public subnet, 2개의 privaste subnet   
+        1.3 RDS : MySQL - free tier     
+        1.4 S3 : Bucket 생성    
+        1.5 Policy : S3 Bucket의 접근 정책 생성 및 EC2 Web Server에 할당
+
+    2. 카카오 디벨로퍼에서 내 애플리케이션 생성 및 카카오 로그인 활성화 ON (https://developers.kakao.com/)  
+    2-1. Redirect URI 설정. _http://<로드밸런서 URL>/<리다이렉트할 경로>_
+    3. Web Server 인스턴스에 접속 후, NodeJS 설치
+    4. git repo 클론
+    ```
+      git clone https://github.com/byun618/KNUP.git
+    ```
+    5. AWSMigration 폴더로 이동
+    6. npm 모듈 설치
+    ```
+      npm install
+    ```
+    7. bin폴더 내에 .env 생성
+    ```
+        VERSION = deployment
+        PORT = 8080
+        DEPHOST = AWS 로드밸런서 URL
+        DBDEPUSERNAME = admin
+        DBDEPPASSWORD = adminpwd
+        DBDEPDATABASE = knup
+        DBDEPHOST = AWS RDS 엔드포인트
+        DBDIALECT = mysql
+        DBOPERATORALIASES = false
+        AWSBUCKETNAME = knup
+        AWSREGION = ap-northeast-2
+        KAKAKORESTAPIKEY = 7e5d1c5a3647aead2c2abadcedbe6754
+        KAKAOREDIRECTURI = /api/kakao/oauth
+        KAKAOAUTHHOST = https://kauth.kakao.com
+        KAKAOAPIHOST = https://kapi.kakao.com
+        KAKAOTOKENURI = /oauth/token
+        KAKAOUSERURI = /v2/user/me
+        KAKAOLOGOUTURI = /v1/user/logout
+        KAKAOUNLINKURI = /v1/user/unlink
+    ```
+    8. pm2를 이용하여 실행
+    
+    10. 크롬 브라우저 실행  
+    10-1. [문서, 스프레드시트, 프레젠테이션으로 Office 버전 수정 확장프로그램](#https://chrome.google.com/webstore/detail/office-editing-for-docs-s/gbkeegbaiigmenfmjfclcdgdpimamgkj?hl=ko) 설치    
+    10-2 브라우저에서 실행
