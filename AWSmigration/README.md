@@ -3,7 +3,10 @@
 ## 목차
 [1. 프로젝트 개요](#프로젝트-개요)  
 [2. 개발환경](#개발환경)    
-[3. Getting Started](#Getting-Started)   
+[3. 개발과정](#개발과정)    
+[4. 개발파트](#개발파트)    
+[5. 개발리뷰](#개발리뷰)    
+[6. Getting Started](#Getting-Started)   
 
 ## 프로젝트 개요
 * **명칭**  
@@ -23,6 +26,24 @@ Web Util Application
     * IAM 정책을 통해 액세스 컨트롤
 * NodeJS
     * 서버 및 EJS 엔진을 이용한 웹페이지 작성
+
+## 개발과정
+**3명**이서 팀을 이뤄 진행   
+처음에는 로컬 환경에서 개발 시작    
+개발 후반부에 파일 업로드 스토리지를 **S3**로 대체  
+졸업작품 일정이 마무리되고, *개인적으로 나머지 부분 **AWS 이관** 작업, 폴더 정리 및 환경설정 부문 개발*
+
+## 개발파트
+크게 네가지 파트, **서버** **DB** **웹페이지** **AWS**   
+### 내가 맡은 파트
+* PM(Project Manager) 역할로 프로젝트 계획 및 전반적인 파트 진행
+* 서버 *70%*
+* DB *50%*
+* 웹페이지 *10%*
+* AWS *100%*   
+
+## 개발리뷰
+처음으로 제대로 진행한 팀 프로젝트로 알고 있던대로 많은 어려움이 있었다. 개발자체에 대한 어려움보다는 협업에 관한 점이 특히 어려웠다. 개개인의 스케줄을 맞춰 일정계획을 수립하고, Git을 이용하여 프로젝트를 관리하고, 그 사이 발표 준비도 하는 등에 있어 쉽지만은 않았다. 하지만, 이 프로젝트를 통해 협업이라는 업무에 익숙해지고, Git을 통해 코드관리 능력도 많이 성장한 것 같다. 아쉬운 점으로는 개발일지나 개발히스토리 같은 것들을 남기지 못해 기억에 의존한 리뷰밖에 하지 못한다는 점이다.(함부로 브랜치 지우면 안됨;;;)
 
 ## Getting Started
 
@@ -83,7 +104,7 @@ Web Util Application
 * ### deployment(AWS에서 서버 구동)
     1. AWS 구축     
         1-1. 설계
-        <img width="838" alt="스크린샷 2020-11-02 오후 10 56 29" src="https://user-images.githubusercontent.com/27637757/97876098-ad815e00-1d5e-11eb-8f18-06efeb2986b0.png">   
+        <img width="838" alt="스크린샷 2020-11-02 오후 10 56 29" src="https://user-images.githubusercontent.com/27637757/97876098-ad815e00-1d5e-11eb-8f18-06efeb2986b0.png">  
         1-2. EC2
         * NAT Instance : Community AMIs - nat 검색  - 맨 위에 있는 것
         * Web Server : Ubuntu Server 18.04 LTS (HVM), SSD Volume Type   
@@ -93,6 +114,31 @@ Web Util Application
         1-4. RDS : MySQL - free tier     
         1-5. S3 : Bucket 생성    
         1-6. Policy : S3 Bucket의 접근 정책 생성 및 EC2 Web Server에 할당
+        ```
+        {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Effect": "Allow",
+                    "Action": "s3:ListAllMyBuckets",
+                    "Resource": "*"
+                },
+                {
+                    "Effect": "Allow",
+                    "Action": "s3:ListBucket",
+                    "Resource": "arn:aws:s3:::knup"
+                },
+                {
+                    "Effect": "Allow",
+                    "Action": [
+                        "s3:GetObject",
+                        "s3:PutObject"
+                    ],
+                    "Resource": "arn:aws:s3:::knup/*"
+                }
+            ]
+        }
+        ```
 
     2. 카카오 디벨로퍼에서 내 애플리케이션 생성 및 카카오 로그인 활성화 ON (https://developers.kakao.com/)  
     2-1. Redirect URI 설정. _http://<로드밸런서 URL>/<리다이렉트할 경로>_
@@ -142,12 +188,10 @@ Web Util Application
         pm2 startup www
         ``` 
         이 후에 나온 sudo ~ 코드 복사, 실행   
-    ![ezgif com-gif-maker (2)](https://user-images.githubusercontent.com/27637757/97881693-11f3eb80-1d66-11eb-851b-9cc9fb6f76db.gif)
-
-    
-    10. 크롬 브라우저 실행  
-    10-1. [문서, 스프레드시트, 프레젠테이션으로 Office 버전 수정 확장프로그램](#https://chrome.google.com/webstore/detail/office-editing-for-docs-s/gbkeegbaiigmenfmjfclcdgdpimamgkj?hl=ko) 설치    
-    10-2 브라우저에서 실행
+    ![ezgif com-gif-maker (2)](https://user-images.githubusercontent.com/27637757/97881693-11f3eb80-1d66-11eb-851b-9cc9fb6f76db.gif)    
+    9. 크롬 브라우저 실행  
+    9-1. [문서, 스프레드시트, 프레젠테이션으로 Office 버전 수정 확장프로그램](#https://chrome.google.com/webstore/detail/office-editing-for-docs-s/gbkeegbaiigmenfmjfclcdgdpimamgkj?hl=ko) 설치    
+    9-2 브라우저에서 실행
     ```
         AWS Loadbalancer DNS/KNUP
     ```
