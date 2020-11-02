@@ -2,6 +2,7 @@ const fs = require('fs')
 const AWS = require('./aws')
 const db = require('../../bin/db')
 const path = require('path')
+const config = require('../../bin/config').aws
 
 exports.filelist = (req, res) => {
 
@@ -39,7 +40,7 @@ exports.preview = (req, res) => {
     let key_filename = path.basename(key)
 
     const params = {
-        Bucket: "knup",
+        Bucket: config.bucket,
         Key: key
     }
 

@@ -33,8 +33,10 @@ db.deployment.operatorAliases = env.DBOPERATORALIASES
 // AWS Configure
 aws = {}
 aws.development = {}
+aws.development.bucket = env.AWSBUCKETNAME
 aws.development.region = env.AWSREGION
 aws.deployment = {}
+aws.deployment.bucket = env.AWSBUCKETNAME
 aws.deployment.region = env.AWSREGION
 
 // Kakao Configure
@@ -66,7 +68,5 @@ if (env.VERSION == "development") {
     config.kakao = kakao.deployment
     config.aws = aws.deployment
 }
-
-console.log(config.aws)
 
 module.exports = config
