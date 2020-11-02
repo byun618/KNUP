@@ -7,6 +7,6 @@ node_modules/
 echo '/KNUP_Server/data/!uploads/.gitkeep'
 
 #AWSmigration
-
+/AWSmigration/node_modules
 /AWSmigration/bin/.env
 
