@@ -11,6 +11,7 @@ let access_token;
 
 exports.oauth = (req, res) => {
 
+    console.log('asd')
     code = req.query.code
     
     var dataString = `grant_type=authorization_code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&code=${code}`;
