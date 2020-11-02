@@ -82,32 +82,36 @@ Web Util Application
 
 * ### deployment(AWS에서 서버 구동)
     1. AWS 구축     
-        1.1 설계
-        <img width="838" alt="스크린샷 2020-11-02 오후 10 56 29" src="https://user-images.githubusercontent.com/27637757/97876098-ad815e00-1d5e-11eb-8f18-06efeb2986b0.png">
-        1.2 EC2
+        1-1. 설계
+        <img width="838" alt="스크린샷 2020-11-02 오후 10 56 29" src="https://user-images.githubusercontent.com/27637757/97876098-ad815e00-1d5e-11eb-8f18-06efeb2986b0.png">  
+        1-2. EC2
         * NAT Instance : Community AMIs - nat 검색  - 맨 위에 있는 것
         * Web Server : Ubuntu Server 18.04 LTS (HVM), SSD Volume Type   
         * LoadBalancer 설정 및 생성
 
-        1.3 VPC : 두 개의 AZ, 하나의 public subnet, 2개의 privaste subnet   
-        1.3 RDS : MySQL - free tier     
-        1.4 S3 : Bucket 생성    
-        1.5 Policy : S3 Bucket의 접근 정책 생성 및 EC2 Web Server에 할당
+        1-3. VPC : 두 개의 AZ, 하나의 public subnet, 2개의 privaste subnet   
+        1-4. RDS : MySQL - free tier     
+        1-5. S3 : Bucket 생성    
+        1-6. Policy : S3 Bucket의 접근 정책 생성 및 EC2 Web Server에 할당
 
     2. 카카오 디벨로퍼에서 내 애플리케이션 생성 및 카카오 로그인 활성화 ON (https://developers.kakao.com/)  
     2-1. Redirect URI 설정. _http://<로드밸런서 URL>/<리다이렉트할 경로>_
-    3. Web Server 인스턴스에 접속 후, NodeJS 설치
+    3. Web Server 인스턴스에 접속 후, NodeJS 설치   
+        3-1. pm2 모듈 설치
+        ```
+        npm install -g pm2
+        ```
     4. git repo 클론
-    ```
-      git clone https://github.com/byun618/KNUP.git
-    ```
+        ```
+        git clone https://github.com/byun618/KNUP.git
+        ```
     5. AWSMigration 폴더로 이동
     6. npm 모듈 설치
-    ```
-      npm install
-    ```
+        ```
+        npm install
+        ```
     7. bin폴더 내에 .env 생성
-    ```
+        ```
         VERSION = deployment
         PORT = 8080
         DEPHOST = AWS 로드밸런서 URL
@@ -127,9 +131,24 @@ Web Util Application
         KAKAOUSERURI = /v2/user/me
         KAKAOLOGOUTURI = /v1/user/logout
         KAKAOUNLINKURI = /v1/user/unlink
-    ```
-    8. pm2를 이용하여 실행
+        ```
+    8. pm2를 이용하여 실행  
+        8-1. pm2로 start    
+        ```
+        pm2 start www.js
+        ```
+        8-2. 인스턴스 실행시 서버도 같이 실행되게 설정
+        ```
+        pm2 startup www
+        ``` 
+        이 후에 나온 sudo ~ 코드 복사, 실행   
+    ![ezgif com-gif-maker (2)](https://user-images.githubusercontent.com/27637757/97881693-11f3eb80-1d66-11eb-851b-9cc9fb6f76db.gif)
+
     
     10. 크롬 브라우저 실행  
     10-1. [문서, 스프레드시트, 프레젠테이션으로 Office 버전 수정 확장프로그램](#https://chrome.google.com/webstore/detail/office-editing-for-docs-s/gbkeegbaiigmenfmjfclcdgdpimamgkj?hl=ko) 설치    
     10-2 브라우저에서 실행
+    ```
+        AWS Loadbalancer DNS/KNUP
+    ```
+    ![ezgif com-gif-maker (3)](https://user-images.githubusercontent.com/27637757/97881729-1ae4bd00-1d66-11eb-81da-e0e96460f3fa.gif)
