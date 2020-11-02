@@ -33,7 +33,12 @@ Web Util Application
     3. AWS IAM 생성 및 사용할 Bucket 생성
     4. MySQL 설치   
         4-1. 유저 및 데이터베이스 생성
-    5. bin폴더 내에 .env 생성
+    5. git repo 클론
+    ```
+      git clone https://github.com/byun618/KNUP.git
+    ```
+    6. AWSMigration 폴더로 이동
+    7. bin폴더 내에 .env 생성
     ```
         VERSION = development
         PORT = 원하는 포트 번호
@@ -46,7 +51,7 @@ Web Util Application
         DBOPERATORALIASES = false
         AWSACCESSKEYID = AWS IAM 액세스 키 아이디
         AWSSECRETACCESSKEY = AWS IAM 시크릿 액세스 키
-        AWSBUCKETNAME
+        AWSBUCKETNAME = 
         AWSREGION = S3 Bucket이 있는 region
         KAKAKORESTAPIKEY = Kakao REST API KEY
         KAKAOREDIRECTURI = <리다이렉트할 경로>(without host)
@@ -57,13 +62,13 @@ Web Util Application
         KAKAOLOGOUTURI = /v1/user/logout
         KAKAOUNLINKURI = /v1/user/unlink
     ```
-    6. 터미널 및 cmd에서 bin 폴더로 이동 후, 실행
+    8. 터미널 및 cmd에서 bin 폴더로 이동 후, 실행
     ```
         node www
     ```
-    7. 크롬 브라우저 실행
-        7-1. [문서, 스프레드시트, 프레젠테이션으로 Office 버전 수정 확장프로그램](#https://chrome.google.com/webstore/detail/office-editing-for-docs-s/gbkeegbaiigmenfmjfclcdgdpimamgkj?hl=ko) 설치
-    8. 브라우저에서 실행
+    9. 크롬 브라우저 실행
+        9-1. [문서, 스프레드시트, 프레젠테이션으로 Office 버전 수정 확장프로그램](#https://chrome.google.com/webstore/detail/office-editing-for-docs-s/gbkeegbaiigmenfmjfclcdgdpimamgkj?hl=ko) 설치
+    10. 브라우저에서 실행
     ```
         localhost:<포트번호>/KNUP
     ```
