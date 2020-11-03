@@ -43,16 +43,15 @@ Web Util Application
 * _AWS CLI 또는 Shell Script로 AWS 구축도 개발할 예정(AWS Management Console이 아닌)(2020.11.02)_
 
 ## 개발파트
-크게 네가지 파트, **서버** **DB** **웹페이지** **AWS**   
+크게 네가지 파트, **서버**, **DB**, **UI**, **AWS**   
 ### 내가 맡은 파트
 * PM(Project Manager) 역할로 프로젝트 계획 및 전반적인 파트 진행
 * 서버 *70%*
 * DB *50%*
-* 웹페이지 *10%*
 * AWS *100%* 
 
 ## 개발리뷰
-처음으로 제대로 진행한 팀 프로젝트로 알고 있던대로 많은 어려움이 있었다. 개발자체에 대한 어려움보다는 협업에 관한 점이 특히 어려웠다. 개개인의 스케줄을 맞춰 일정계획을 수립하고, Git을 이용하여 프로젝트를 관리하고, 그 사이 발표 준비도 하는 등에 있어 쉽지만은 않았다. 하지만, 이 프로젝트를 통해 협업이라는 업무에 익숙해지고, Git을 통해 코드관리 능력도 많이 성장한 것 같다. 아쉬운 점으로는 개발일지나 개발히스토리 같은 것들을 남기지 못해 기억에 의존한 리뷰밖에 하지 못한다는 점이다.(함부로 브랜치 지우면 안됨;;;)
+처음으로 제대로 진행한 팀 프로젝트로 알고 있던대로 많은 어려움이 있었다. 개발자체에 대한 어려움보다는 협업에 관한 점이 특히 어려웠다. 개개인의 스케줄을 맞춰 일정계획을 수립하고, Git을 이용하여 프로젝트를 관리하고, 그 사이 발표 준비도 하는 등에 있어 쉽지만은 않았다. 하지만, 이 프로젝트를 통해 협업이라는 업무에 익숙해지고, Git을 통해 코드관리 능력도 많이 성장한 것 같다. 아쉬운 점으로는 개발일지나 개발히스토리 같은 것들을 남기지 못해 기억에 의존한 리뷰 밖에 하지 못한다는 점이다.(함부로 브랜치 지우면 안됨;;;)
 
 ## Getting Started
 
@@ -113,7 +112,9 @@ Web Util Application
 * ### deployment(AWS에서 서버 구동)
     1. AWS 구축     
         1-1. 설계
-        <img width="838" alt="스크린샷 2020-11-02 오후 10 56 29" src="https://user-images.githubusercontent.com/27637757/97876098-ad815e00-1d5e-11eb-8f18-06efeb2986b0.png">  
+
+        <img width="838" alt="스크린샷 2020-11-02 오후 10 56 29" src="https://user-images.githubusercontent.com/27637757/97876098-ad815e00-1d5e-11eb-8f18-06efeb2986b0.png">      
+
         1-2. EC2
         * NAT Instance : Community AMIs - nat 검색  - 맨 위에 있는 것
         * Web Server : Ubuntu Server 18.04 LTS (HVM), SSD Volume Type   
@@ -170,16 +171,16 @@ Web Util Application
         VERSION = deployment
         PORT = 8080
         DEPHOST = AWS 로드밸런서 URL
-        DBDEPUSERNAME = admin
-        DBDEPPASSWORD = adminpwd
-        DBDEPDATABASE = knup
+        DBDEPUSERNAME = DB 유저 이름
+        DBDEPPASSWORD = DB 유저 패스워드
+        DBDEPDATABASE = DB database 이름
         DBDEPHOST = AWS RDS 엔드포인트
         DBDIALECT = mysql
         DBOPERATORALIASES = false
-        AWSBUCKETNAME = knup
+        AWSBUCKETNAME = Bucket 이름
         AWSREGION = ap-northeast-2
-        KAKAKORESTAPIKEY = 7e5d1c5a3647aead2c2abadcedbe6754
-        KAKAOREDIRECTURI = /api/kakao/oauth
+        KAKAKORESTAPIKEY = Kakao REST API KEY
+        KAKAOREDIRECTURI = <리다이렉트할 경로>(without host)
         KAKAOAUTHHOST = https://kauth.kakao.com
         KAKAOAPIHOST = https://kapi.kakao.com
         KAKAOTOKENURI = /oauth/token
