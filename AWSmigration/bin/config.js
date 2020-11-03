@@ -32,9 +32,12 @@ db.deployment.operatorAliases = env.DBOPERATORALIASES
 
 // AWS Configure
 aws = {}
-aws.accessKeyId = env.AWSACCESSKEYID || ''
-aws.secretAccessKey = env.AWSSECRETACCESSKEY || ''
-aws.region = env.AWSREGION
+aws.development = {}
+aws.development.bucket = env.AWSBUCKETNAME
+aws.development.region = env.AWSREGION
+aws.deployment = {}
+aws.deployment.bucket = env.AWSBUCKETNAME
+aws.deployment.region = env.AWSREGION
 
 // Kakao Configure
 kakao = {}
@@ -58,11 +61,12 @@ if (env.VERSION == "development") {
     config.web = web.development
     config.db = db.development
     config.kakao = kakao.development
+    config.aws = aws.development
 } else if (env.VERSION == "deployment") {
     config.web = web.deployment
     config.db = db.deployment
     config.kakao = kakao.deployment
+    config.aws = aws.deployment
 }
-config.aws = aws
 
 module.exports = config
