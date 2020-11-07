@@ -35,6 +35,7 @@ Web Util Application
 * AWS : `변상현`
 
 ## 개발 과정
+* SpringFramework로 개발하다가 NodeJS로 전환 (https://github.com/byun618/KNUP_Spring.git)
 * 1학기에는 UI는 크게 신경쓰지 않고, 서버, DB 개발에 집중    
 * 2학기에 UI 개발 
 * 시연 및 테스트를 위해 AWS 이용
