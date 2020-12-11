@@ -1,5 +1,6 @@
 const fs = require('fs')
 const models = require('../../../bin/db')
+let { FILE_PATH : path } = process.env;
 
 exports.filelist = (req, res) => {
 
@@ -30,8 +31,7 @@ exports.filelist = (req, res) => {
 }
 
 exports.preview = (req, res) => {
-    var path = "/Users/sanghyunbyun/Desktop/KNUP/KNUP_Server/data/uploads/" 
-
+  
     origin = req.body.originalname
     stored = req.body.storedname
 
@@ -40,7 +40,7 @@ exports.preview = (req, res) => {
     format = split[end]
 
     path += stored
-
+   
     fs.readFile(path, (err, data) => {
 
         switch (format) {

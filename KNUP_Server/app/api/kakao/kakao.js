@@ -4,16 +4,13 @@ const { json } = require('express');
 
 const { REST_API_KEY } = process.env;
 const { REDIRECT_URI } = process.env;
-const { ADMIN_KEY } = process.env;
 
 let code
 let access_token;
 
 exports.oauth = (req, res) => {
 
-    console.log('asd')
     code = req.query.code
-    
     var dataString = `grant_type=authorization_code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&code=${code}`;
 
     request.post({
@@ -24,6 +21,7 @@ exports.oauth = (req, res) => {
     }, (error, response, body) => {
         
         j_body = JSON.parse(body)
+        console.log(j_body)
         access_token = j_body.access_token
         
         res.redirect('/api/kakao/login')
@@ -40,9 +38,10 @@ exports.login = (req, res) => {
         
         sess = req.session
         j_body = JSON.parse(body)
-
+       
         sess.userid = j_body.id
         sess.nickname = j_body.properties.nickname
+      
         sess.islogin = 'true'
 
         res.redirect('/KNUP')

@@ -2,7 +2,10 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer')
 const file = require('./file')
-const upload = multer({dest: '/Users/sanghyunbyun/Desktop/KNUP/KNUP_Server/data/uploads/'})
+
+const { FILE_PATH : path } = process.env;
+
+const upload = multer({dest: path})
 
 router.post('/upload', upload.array('userfile'), file.upload)
 

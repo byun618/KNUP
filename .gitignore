@@ -5,8 +5,3 @@ node_modules/
 /KNUP_Server/bin/db/db-config.json
 /KNUP_Server/data/uploads/
 echo '/KNUP_Server/data/!uploads/.gitkeep'
-
-#AWSmigration
-/AWSmigration/node_modules
-/AWSmigration/bin/.env
-
