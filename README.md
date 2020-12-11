@@ -65,33 +65,22 @@ npm install
         "dialect" : "mysql",
         "operatorAliases" : false 
     },
-    "aws" : {
-        "username" : "admin",
-        "password" : "adminpw",
-        "database" : "knup",
-        "host" : AWS RDS End Point,
-        "dialect" : "mysql",
-        "operatorAliases" : false
-
-    }
 }
 ```
 7. KNUP_Server/.env 생성
 ```
-PORT = 3000
-REST_API_KEY = 
-REDIRECT_URI = 
+PORT = 원하는 포트 번호
+REST_API_KEY = 카카오 디벨로퍼의 애플리케이선 REST API KEY
+REDIRECT_URI = 카카오 디벨로퍼의 애플리케이선 Redirect URI
+FILE_PATH = 파일 업로드 및 다운로드 경로
 ```
-8. 기타 설정 수정  
-    * 업로드 할 파일 위치
-    * 기타 URL, 경로 확인
-9. 터미널 및 cmd에서 bin 폴더로 이동 후, 실행
+8. 터미널 및 cmd에서 bin 폴더로 이동 후, 실행
 ```
 node www
 ```
-10. 크롬 브라우저 실행  
-    10-1. [문서, 스프레드시트, 프레젠테이션으로 Office 버전 수정 확장프로그램](#https://chrome.google.com/webstore/detail/office-editing-for-docs-s/gbkeegbaiigmenfmjfclcdgdpimamgkj?hl=ko) 설치    
-    10-2 브라우저에서 실행
+9. 크롬 브라우저 실행  
+    9-1. [문서, 스프레드시트, 프레젠테이션으로 Office 버전 수정 확장프로그램](#https://chrome.google.com/webstore/detail/office-editing-for-docs-s/gbkeegbaiigmenfmjfclcdgdpimamgkj?hl=ko) 설치    
+    9-2 브라우저에서 실행
 ```
 localhost:<포트번호>/KNUP
 ```
